@@ -34,12 +34,12 @@ Class IblockTable
     * Унаследованные методы используемые в примерах [7]:
 
         * [Метод getList](/doc/main/lib/orm/data/DataManager.md#метод-getList)
-        * [Метод add](/doc/main/lib/orm/data/DataManager.md#метод-getList)
-        * [Метод update](/doc/main/lib/orm/data/DataManager.md#метод-getList)
-        * [Метод delete](/doc/main/lib/orm/data/DataManager.md#метод-getList)
-        * [Метод query](/doc/main/lib/orm/data/DataManager.md#метод-getList)
-        * [Метод getByPrimary](/doc/main/lib/orm/data/DataManager.md#метод-getList)
-        * [Метод createObject](/doc/main/lib/orm/data/DataManager.md#метод-getList)
+        * [Метод add](/doc/main/lib/orm/data/DataManager.md#метод-add)
+        * [Метод update](/doc/main/lib/orm/data/DataManager.md#метод-update)
+        * [Метод delete](/doc/main/lib/orm/data/DataManager.md#метод-delete)
+        * [Метод query](/doc/main/lib/orm/data/DataManager.md#метод-query)
+        * [Метод getByPrimary](/doc/main/lib/orm/data/DataManager.md#метод-getByPrimary)
+        * [Метод createObject](/doc/main/lib/orm/data/DataManager.md#метод-createObject)
 
 * Примеры:
 
