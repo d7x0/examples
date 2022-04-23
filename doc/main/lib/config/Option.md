@@ -10,11 +10,11 @@
     * Собственные методы:
 
         1. [Метод get](#метод-get)
-        1. [Метод getRealValue](#метод-getRealValue)
-        1. [Метод getDefaults](#метод-getDefaults)
-        1. [Метод getForModule](#метод-getForModule)
-        1. [Метод set](#метод-set)
-        1. [Метод delete](#метод-delete)
+        2. [Метод getRealValue](#метод-getRealValue)
+        3. [Метод getDefaults](#метод-getDefaults)
+        4. [Метод getForModule](#метод-getForModule)
+        5. [Метод set](#метод-set)
+        6. [Метод delete](#метод-delete)
 
 ![s](/asset/image/separator/30x30.png)
 

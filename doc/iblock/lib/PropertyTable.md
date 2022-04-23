@@ -12,17 +12,17 @@ Class PropertyTable
     * Собственные методы:
 
         1. [Метод getTableName](#метод-getTableName)
-        1. [Метод getMap](#метод-getMap)
-        1. [Метод validateName](#метод-validateName)
-        1. [Метод validateCode](#метод-validateCode)
-        1. [Метод validateXmlId](#метод-validateXmlId)
-        1. [Метод validateFileType](#метод-validateFileType)
-        1. [Метод validateTmpId](#метод-validateTmpId)
-        1. [Метод validateUserType](#метод-validateUserType)
-        1. [Метод validateHint](#метод-validateHint)
-        1. [Метод onBeforeAdd](#метод-onBeforeAdd)
-        1. [Метод onBeforeUpdate](#метод-onBeforeUpdate)
-        1. [Метод copyOldFields](#метод-copyOldFields)
+        2. [Метод getMap](#метод-getMap)
+        3. [Метод validateName](#метод-validateName)
+        4. [Метод validateCode](#метод-validateCode)
+        5. [Метод validateXmlId](#метод-validateXmlId)
+        6. [Метод validateFileType](#метод-validateFileType)
+        7. [Метод validateTmpId](#метод-validateTmpId)
+        8. [Метод validateUserType](#метод-validateUserType)
+        9. [Метод validateHint](#метод-validateHint)
+        10. [Метод onBeforeAdd](#метод-onBeforeAdd)
+        11. [Метод onBeforeUpdate](#метод-onBeforeUpdate)
+        12. [Метод copyOldFields](#метод-copyOldFields)
 
 ![s](/asset/image/separator/30x30.png)
 
