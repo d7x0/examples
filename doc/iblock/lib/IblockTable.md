@@ -630,18 +630,7 @@ public static onAfterDelete($event)
 
 
 ## Унаследованные методы
-#### Оглавление:
-
-* Методы:
-    * Собственные методы:
-
-        1. [Метод getList](#метод-getList)
-        1. [Метод add](#метод-add)
-        1. [Метод update](#метод-update)
-        1. [Метод delete](#метод-delete)
-        1. [Метод query](#метод-query)
-        1. [Метод getByPrimary](#метод-getByPrimary)
-        1. [Метод createObject](#метод-createObject)
+Описание методов см. класс `Bitrix\Main\ORM\Data\DataManager`
 
 # Примеры
 
