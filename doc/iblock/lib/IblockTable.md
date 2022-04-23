@@ -9,37 +9,37 @@ Class IblockTable
 #### Оглавление:
 
 * Методы:
-    * Собственные методы:
+    * Собственные методы [19]:
 
-        1. [Метод getTableName](#метод-getTableName)
-        2. [Метод getMap](#метод-getMap)
-        3. [Метод compileEntity](#метод-compileEntity)
-        4. [Метод compileAllEntities](#метод-compileAllEntities)
-        5. [Метод validateIblockTypeId](#метод-validateIblockTypeId)
-        6. [Метод validateLid](#метод-validateLid)
-        7. [Метод validateCode](#метод-validateCode)
-        8. [Метод validateName](#метод-validateName)
-        9. [Метод validateListPageUrl](#метод-validateListPageUrl)
-        10. [Метод validateDetailPageUrl](#метод-validateDetailPageUrl)
-        11. [Метод validateSectionPageUrl](#метод-validateSectionPageUrl)
-        12. [Метод validateCanonicalPageUrl](#метод-validateCanonicalPageUrl)
-        13. [Метод validateXmlId](#метод-validateXmlId)
-        14. [Метод validateTmpId](#метод-validateTmpId)
-        15. [Метод validateEditFileBefore](#метод-validateEditFileBefore)
-        16. [Метод validateEditFileAfter](#метод-validateEditFileAfter)
-        17. [Метод onAfterAdd](#метод-onAfterAdd)
-        18. [Метод onAfterUpdate](#метод-onAfterUpdate)
-        19. [Метод onAfterDelete](#метод-onAfterDelete)
+        * [Метод getTableName](#метод-getTableName)
+        * [Метод getMap](#метод-getMap)
+        * [Метод compileEntity](#метод-compileEntity)
+        * [Метод compileAllEntities](#метод-compileAllEntities)
+        * [Метод validateIblockTypeId](#метод-validateIblockTypeId)
+        * [Метод validateLid](#метод-validateLid)
+        * [Метод validateCode](#метод-validateCode)
+        * [Метод validateName](#метод-validateName)
+        * [Метод validateListPageUrl](#метод-validateListPageUrl)
+        * [Метод validateDetailPageUrl](#метод-validateDetailPageUrl)
+        * [Метод validateSectionPageUrl](#метод-validateSectionPageUrl)
+        * [Метод validateCanonicalPageUrl](#метод-validateCanonicalPageUrl)
+        * [Метод validateXmlId](#метод-validateXmlId)
+        * [Метод validateTmpId](#метод-validateTmpId)
+        * [Метод validateEditFileBefore](#метод-validateEditFileBefore)
+        * [Метод validateEditFileAfter](#метод-validateEditFileAfter)
+        * [Метод onAfterAdd](#метод-onAfterAdd)
+        * [Метод onAfterUpdate](#метод-onAfterUpdate)
+        * [Метод onAfterDelete](#метод-onAfterDelete)
 
-    * Унаследованные методы используемые в примерах:
+    * Унаследованные методы используемые в примерах [7]:
 
-        1. [Метод getList](#метод-getList)
-        2. [Метод add](#метод-add)
-        3. [Метод update](#метод-update)
-        4. [Метод delete](#метод-delete)
-        5. [Метод query](#метод-query)
-        6. [Метод getByPrimary](#метод-getByPrimary)
-        7. [Метод createObject](#метод-createObject)
+        * [Метод getList](#метод-getList)
+        * [Метод add](#метод-add)
+        * [Метод update](#метод-update)
+        * [Метод delete](#метод-delete)
+        * [Метод query](#метод-query)
+        * [Метод getByPrimary](#метод-getByPrimary)
+        * [Метод createObject](#метод-createObject)
 
 * Примеры:
 

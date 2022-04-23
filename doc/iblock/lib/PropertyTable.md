@@ -9,20 +9,20 @@ Class PropertyTable
 #### Оглавление:
 
 * Методы:
-    * Собственные методы:
+    * Собственные методы [12]:
 
-        1. [Метод getTableName](#метод-getTableName)
-        2. [Метод getMap](#метод-getMap)
-        3. [Метод validateName](#метод-validateName)
-        4. [Метод validateCode](#метод-validateCode)
-        5. [Метод validateXmlId](#метод-validateXmlId)
-        6. [Метод validateFileType](#метод-validateFileType)
-        7. [Метод validateTmpId](#метод-validateTmpId)
-        8. [Метод validateUserType](#метод-validateUserType)
-        9. [Метод validateHint](#метод-validateHint)
-        10. [Метод onBeforeAdd](#метод-onBeforeAdd)
-        11. [Метод onBeforeUpdate](#метод-onBeforeUpdate)
-        12. [Метод copyOldFields](#метод-copyOldFields)
+        * [Метод getTableName](#метод-getTableName)
+        * [Метод getMap](#метод-getMap)
+        * [Метод validateName](#метод-validateName)
+        * [Метод validateCode](#метод-validateCode)
+        * [Метод validateXmlId](#метод-validateXmlId)
+        * [Метод validateFileType](#метод-validateFileType)
+        * [Метод validateTmpId](#метод-validateTmpId)
+        * [Метод validateUserType](#метод-validateUserType)
+        * [Метод validateHint](#метод-validateHint)
+        * [Метод onBeforeAdd](#метод-onBeforeAdd)
+        * [Метод onBeforeUpdate](#метод-onBeforeUpdate)
+        * [Метод copyOldFields](#метод-copyOldFields)
 
 ![s](/asset/image/separator/30x30.png)
 

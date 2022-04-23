@@ -7,14 +7,14 @@
 #### Оглавление:
 
 * Методы:
-    * Собственные методы:
+    * Собственные методы [6]:
 
-        1. [Метод get](#метод-get)
-        2. [Метод getRealValue](#метод-getRealValue)
-        3. [Метод getDefaults](#метод-getDefaults)
-        4. [Метод getForModule](#метод-getForModule)
-        5. [Метод set](#метод-set)
-        6. [Метод delete](#метод-delete)
+        * [Метод get](#метод-get)
+        * [Метод getRealValue](#метод-getRealValue)
+        * [Метод getDefaults](#метод-getDefaults)
+        * [Метод getForModule](#метод-getForModule)
+        * [Метод set](#метод-set)
+        * [Метод delete](#метод-delete)
 
 ![s](/asset/image/separator/30x30.png)
 
