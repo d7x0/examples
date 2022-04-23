@@ -16,8 +16,6 @@
         1. [Метод set](#метод-set)
         1. [Метод delete](#метод-delete)
 
-![s](/asset/image/separator/30x30.png)
-
 # Методы
 ## Собственные методы
 
