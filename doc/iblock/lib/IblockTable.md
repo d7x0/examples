@@ -660,6 +660,7 @@ while ($itgdex1row = $itgdex1->fetchAll())
     $itgdex1count++;
 }
 ```
+[к оглавлению](#оглавление)
 
 #### Добавление нового элемента
 
@@ -681,6 +682,7 @@ catch (Exception $e)
 {
 }
 ```
+[к оглавлению](#оглавление)
 
 #### Обновление существующего элемента
 
@@ -691,6 +693,7 @@ $itudex1result = IblockTable::update(2, [
     'NAME' => 'Одежда А'
 ]);
 ```
+[к оглавлению](#оглавление)
 
 #### Удаление существующего элемента
 
@@ -699,6 +702,7 @@ $itudex1result = IblockTable::update(2, [
 ```php
 $itddex1result = IblockTable::delete(4);
 ```
+[к оглавлению](#оглавление)
 
 ### Объектный стиль
 
@@ -721,6 +725,7 @@ while ($itqex1row = $itqex1result1->fetch())
     $itqex1count++;
 }
 ```
+[к оглавлению](#оглавление)
 
 #### Добавление нового элемента
 
@@ -734,6 +739,7 @@ $ita1result =  $ita1->setIblockTypeId('catalog')
                       ->setName('Компьютеры')
                       ->save();
 ```
+[к оглавлению](#оглавление)
 
 #### Обновление существующего элемента
 
@@ -744,6 +750,7 @@ $itu1 = IblockTable::getByPrimary(10)->fetchObject();
 $itu1result = $itu1->setCode('computers-2022')
                      ->save();
 ```
+[к оглавлению](#оглавление)
 
 #### Удаление существующего элемента
 
@@ -752,6 +759,7 @@ $itu1result = $itu1->setCode('computers-2022')
 ```php
 $itd1result = IblockTable::getByPrimary(10)->fetchObject()->delete();
 ```
+[к оглавлению](#оглавление)
 
 
 
