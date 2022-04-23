@@ -58,6 +58,8 @@ Base entity data manager
         1. [Метод enableCrypto](#метод-enableCrypto)
         1. [Метод cryptoEnabled](#метод-cryptoEnabled)
 
+![s](/asset/image/separator/30x30.png)
+
 # Методы
 ## Собственные методы
 

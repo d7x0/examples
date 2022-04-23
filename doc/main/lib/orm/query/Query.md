@@ -216,6 +216,8 @@ Virtual HAVING methods (proxy to Filter):
         1. [Метод getInitAlias](#метод-getInitAlias)
         1. [Метод cacheJoins](#метод-cacheJoins)
 
+![s](/asset/image/separator/30x30.png)
+
 # Методы
 ## Собственные методы
 

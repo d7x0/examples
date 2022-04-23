@@ -24,6 +24,8 @@ Class PropertyTable
         1. [Метод onBeforeUpdate](#метод-onBeforeUpdate)
         1. [Метод copyOldFields](#метод-copyOldFields)
 
+![s](/asset/image/separator/30x30.png)
+
 # Методы
 ## Собственные методы
 

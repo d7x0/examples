@@ -636,6 +636,8 @@ public static onAfterDelete($event)
 
 ![s](/asset/image/separator/30x30.png)
 
+![s](/asset/image/separator/30x30.png)
+
 # Примеры
 
 ### Старый стиль
