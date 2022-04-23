@@ -31,7 +31,7 @@ Class IblockTable
         * [Метод onAfterUpdate](#метод-onAfterUpdate)
         * [Метод onAfterDelete](#метод-onAfterDelete)
 
-    * Унаследованные методы используемые в примерах [7]:
+    * Унаследованные методы [7]:
 
         * [Метод getList](/doc/main/lib/orm/data/DataManager.md#метод-getList)
         * [Метод add](/doc/main/lib/orm/data/DataManager.md#метод-add)
@@ -54,6 +54,8 @@ Class IblockTable
         * Добавление нового элемента
         * Обновление существующего элемента
         * Удаление существующего элемента
+
+![s](/asset/image/separator/30x30.png)
 
 ![s](/asset/image/separator/30x30.png)
 
@@ -87,7 +89,6 @@ public static getTableName()
 ```php
 // use Bitrix\Main\Loader;
 // Loader::includeModule("iblock");
-// CRUD операции описаны в Bitrix\Main\ORM\Data\DataManager
 $itgtnex1 = IblockTable::getTableName();        // "b_iblock"
 
 ```
@@ -630,9 +631,7 @@ public static onAfterDelete($event)
 
 
 ## Унаследованные методы
-Описание методов см. класс `Bitrix\Main\ORM\Data\DataManager`
-
-![s](/asset/image/separator/30x30.png)
+Описание методов см. класс [`Bitrix\Main\ORM\Data\DataManager`](/doc/main/lib/orm/data/DataManager)
 
 ![s](/asset/image/separator/30x30.png)
 
@@ -647,6 +646,8 @@ public static onAfterDelete($event)
 Пример 1:
 
 ```php
+// use Bitrix\Main\Loader;
+// Loader::includeModule("iblock");
 $itgdex1 = IblockTable::getList([
     'filter' => ['LIST_MODE' => null],
     'select' => ['CODE', 'NAME']
@@ -719,6 +720,8 @@ $itddex1result = IblockTable::delete(4);
 Пример 1:
 
 ```php
+// use Bitrix\Main\Loader;
+// Loader::includeModule("iblock");
 $itqex1 = IblockTable::query()
          ->setFilter(['LIST_MODE' => null])
          ->setSelect(['CODE', 'NAME']);

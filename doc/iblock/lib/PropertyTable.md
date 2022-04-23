@@ -26,6 +26,8 @@ Class PropertyTable
 
 ![s](/asset/image/separator/30x30.png)
 
+![s](/asset/image/separator/30x30.png)
+
 # Методы
 ## Собственные методы
 
@@ -54,7 +56,8 @@ public static getTableName()
 Пример 1
 
 ```php
-// CRUD операции описаны в Bitrix\Main\ORM\Data\DataManager
+// use Bitrix\Main\Loader;
+// Loader::includeModule("iblock");
 $ptgtnex1 = PropertyTable::getTableName();        // "b_iblock_property"
 
 ```
@@ -360,6 +363,10 @@ private static copyOldFields($result, $data)
 [к оглавлению](#оглавление)
 
 ![s](/asset/image/separator/30x30.png)
+
+
+
+
 
 
 

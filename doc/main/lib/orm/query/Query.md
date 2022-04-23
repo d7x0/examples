@@ -218,6 +218,8 @@ Virtual HAVING methods (proxy to Filter):
 
 ![s](/asset/image/separator/30x30.png)
 
+![s](/asset/image/separator/30x30.png)
+
 # Методы
 ## Собственные методы
 
