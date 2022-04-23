@@ -662,6 +662,8 @@ while ($itgdex1row = $itgdex1->fetchAll())
 ```
 [к оглавлению](#оглавление)
 
+![s](/asset/image/separator/30x30.png)
+
 #### Добавление нового элемента
 
 Пример 1:
@@ -684,6 +686,8 @@ catch (Exception $e)
 ```
 [к оглавлению](#оглавление)
 
+![s](/asset/image/separator/30x30.png)
+
 #### Обновление существующего элемента
 
 Пример 1:
@@ -695,6 +699,8 @@ $itudex1result = IblockTable::update(2, [
 ```
 [к оглавлению](#оглавление)
 
+![s](/asset/image/separator/30x30.png)
+
 #### Удаление существующего элемента
 
 Пример 1:
@@ -703,6 +709,8 @@ $itudex1result = IblockTable::update(2, [
 $itddex1result = IblockTable::delete(4);
 ```
 [к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
 
 ### Объектный стиль
 
@@ -727,6 +735,8 @@ while ($itqex1row = $itqex1result1->fetch())
 ```
 [к оглавлению](#оглавление)
 
+![s](/asset/image/separator/30x30.png)
+
 #### Добавление нового элемента
 
 Пример 1:
@@ -741,6 +751,8 @@ $ita1result =  $ita1->setIblockTypeId('catalog')
 ```
 [к оглавлению](#оглавление)
 
+![s](/asset/image/separator/30x30.png)
+
 #### Обновление существующего элемента
 
 Пример 1:
@@ -752,6 +764,8 @@ $itu1result = $itu1->setCode('computers-2022')
 ```
 [к оглавлению](#оглавление)
 
+![s](/asset/image/separator/30x30.png)
+
 #### Удаление существующего элемента
 
 Пример 1:
@@ -760,6 +774,8 @@ $itu1result = $itu1->setCode('computers-2022')
 $itd1result = IblockTable::getByPrimary(10)->fetchObject()->delete();
 ```
 [к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
 
 
 
