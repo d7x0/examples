@@ -24,6 +24,30 @@ Class PropertyTable
         * [Метод onBeforeUpdate](#метод-onBeforeUpdate)
         * [Метод copyOldFields](#метод-copyOldFields)
 
+    * Унаследованные методы [7]:
+
+        * [Метод getList](/doc/main/lib/orm/data/DataManager.md#метод-getList)
+        * [Метод add](/doc/main/lib/orm/data/DataManager.md#метод-add)
+        * [Метод update](/doc/main/lib/orm/data/DataManager.md#метод-update)
+        * [Метод delete](/doc/main/lib/orm/data/DataManager.md#метод-delete)
+        * [Метод query](/doc/main/lib/orm/data/DataManager.md#метод-query)
+        * [Метод getByPrimary](/doc/main/lib/orm/data/DataManager.md#метод-getByPrimary)
+        * [Метод createObject](/doc/main/lib/orm/data/DataManager.md#метод-createObject)
+
+* Примеры:
+
+    * [Старый стиль](#старый-стиль)
+        * Получение списка элементов
+        * Добавление нового элемента
+        * Обновление существующего элемента
+        * Удаление существующего элемента
+
+    * [Объектный стиль](#объектный-стиль)
+        * Получение списка элементов
+        * Добавление нового элемента
+        * Обновление существующего элемента
+        * Удаление существующего элемента
+
 ![s](/asset/image/separator/30x30.png)
 
 ![s](/asset/image/separator/30x30.png)
@@ -365,6 +389,153 @@ private static copyOldFields($result, $data)
 ![s](/asset/image/separator/30x30.png)
 
 
+
+## Унаследованные методы
+Описание методов см. класс [`Bitrix\Main\ORM\Data\DataManager`](/doc/main/lib/orm/data/DataManager.md)
+
+![s](/asset/image/separator/30x30.png)
+
+![s](/asset/image/separator/30x30.png)
+
+# Примеры
+
+### Старый стиль
+
+#### Получение списка элементов
+
+Пример 1:
+
+```php
+// use Bitrix\Main\Loader;
+// Loader::includeModule("iblock");
+$ptglex1 = PropertyTable::getList([
+    'filter' => ['IBLOCK_ID' => 3],
+    'select' => ['CODE', 'NAME']
+]);
+$ptglex1result = $ptglex1->fetchAll();
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Добавление нового элемента
+
+Пример 1:
+
+```php
+$status = false;
+try
+{
+    $ptaex1result = PropertyTable::add([
+        'IBLOCK_ID'      => 5,
+    ]);
+    $status = true;
+}
+catch (Exception $e)
+{
+}
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Обновление существующего элемента
+
+Пример 1:
+
+```php
+$ptuex1result = PropertyTable::update(26, [
+    'NAME' => 'Цвет'
+]);
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Удаление существующего элемента
+
+Пример 1:
+
+```php
+$ptdex1result = PropertyTable::delete(27);
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+### Объектный стиль
+
+#### Получение списка элементов
+
+Пример 1:
+
+```php
+// use Bitrix\Main\Loader;
+// Loader::includeModule("iblock");
+$ptqex1 = PropertyTable::query()
+         ->setFilter(['IBLOCK_ID' => 3])
+         ->setSelect(['CODE', 'NAME']);
+$ptqex1result1 = $ptqex1->exec();
+$ptqex1result2 = $ptqex1->exec();
+$ptqex1datafirst = $ptqex1result2->fetch();
+$ptqex1data  = [];
+$ptqex1count = 0;
+while ($ptqex1row = $ptqex1result1->fetch())
+{
+    array_push($ptqex1data, $ptqex1row);
+    $ptqex1count++;
+}
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Добавление нового элемента
+
+Пример 1:
+
+```php
+$pta1 = PropertyTable::createObject();
+$pta1result =  $pta1->setIblockId(5)
+                      ->setName('Артикул')
+                      ->setCode('ARTICUL')
+                      ->save();
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Обновление существующего элемента
+
+Пример 1:
+
+```php
+$ptu1 = PropertyTable::getByPrimary(30)->fetchObject();
+$ptu1result = $ptu1->setCode('ARTICUL_2022')
+                     ->save();
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Удаление существующего элемента
+
+Пример 1:
+
+```php
+try
+{
+    $ptd1 = PropertyTable::getByPrimary(30)->fetchObject();
+         $ptd1result = $ptd1->delete();
+}
+catch (\Throwable $e)
+{
+    //if $ptd1 == null
+}
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
 
 
 
