@@ -632,6 +632,10 @@ public static onAfterDelete($event)
 ## Унаследованные методы
 Описание методов см. класс `Bitrix\Main\ORM\Data\DataManager`
 
+![s](/asset/image/separator/30x30.png)
+
+![s](/asset/image/separator/30x30.png)
+
 # Примеры
 
 ### Старый стиль
