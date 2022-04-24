@@ -423,11 +423,16 @@ $ptglex1result = $ptglex1->fetchAll();
 Пример 1:
 
 ```php
+$connection = \Bitrix\Main\Application::getConnection();
+$queryResponse = $connection->query("
+    SELECT ID FROM b_iblock WHERE CODE LIKE 'delivery-city'
+")->fetch();
+$id = intval($queryResponse['ID']);
 $status = false;
 try
 {
     $ptaex1result = PropertyTable::add([
-        'IBLOCK_ID'      => 5,
+        'IBLOCK_ID'      => $id,
     ]);
     $status = true;
 }
@@ -444,8 +449,21 @@ catch (Exception $e)
 Пример 1:
 
 ```php
-$ptuex1result = PropertyTable::update(26, [
-    'NAME' => 'Цвет'
+$connection = \Bitrix\Main\Application::getConnection();
+$queryResponse = $connection->query("
+    SELECT ID FROM b_iblock WHERE CODE LIKE 'delivery-city'
+")->fetch();
+$id = intval($queryResponse['ID']);
+$connection = \Bitrix\Main\Application::getConnection();
+$queryResponse = $connection->query("
+    SELECT MAX(ID) AS ID_MAX FROM b_iblock_property WHERE IBLOCK_ID = $id
+")->fetch();
+$idMax = intval($queryResponse['ID_MAX']);
+$ptuex1result = PropertyTable::update($idMax, [
+    'NAME' => 'Цвет',
+    'CODE' => 'COLOR',
+    'ACTIVE'        => 'Y',
+    'PROPERTY_TYPE' => 'S',
 ]);
 ```
 [к оглавлению](#оглавление)
@@ -457,7 +475,18 @@ $ptuex1result = PropertyTable::update(26, [
 Пример 1:
 
 ```php
-$ptdex1result = PropertyTable::delete(27);
+$connection = \Bitrix\Main\Application::getConnection();
+$queryResponse = $connection->query("
+    SELECT ID FROM b_iblock WHERE CODE LIKE 'delivery-city'
+")->fetch();
+$id = intval($queryResponse['ID']);
+$queryResponse = $connection->query("
+    SELECT ID FROM b_iblock_property WHERE IBLOCK_ID = $id
+");
+while($qri = $queryResponse->fetch())
+{
+    $ptdex1result = PropertyTable::delete($qri['ID']);
+}
 ```
 [к оглавлению](#оглавление)
 

@@ -674,10 +674,10 @@ $status = false;
 try
 {
     $itadex1result = IblockTable::add([
-        'IBLOCK_TYPE_ID' => 'catalog',
+        'IBLOCK_TYPE_ID' => 'delivery',
         'LID'            => 's1',
-        'CODE'           => 'electronics',
-        'NAME'           => 'Эдектрониа',
+        'CODE'           => 'delivery-city',
+        'NAME'           => 'Доставка по городу',
     ]);
     $status = true;
 }
@@ -707,7 +707,12 @@ $itudex1result = IblockTable::update(2, [
 Пример 1:
 
 ```php
-$itddex1result = IblockTable::delete(4);
+$connection = \Bitrix\Main\Application::getConnection();
+$queryResponse = $connection->query("
+    SELECT ID FROM b_iblock WHERE CODE LIKE 'delivery-city'
+")->fetch();
+$id = intval($queryResponse['ID']);
+$itddex1result = IblockTable::delete($id);
 ```
 [к оглавлению](#оглавление)
 
