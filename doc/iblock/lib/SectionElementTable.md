@@ -1,21 +1,16 @@
-## Класс IblockGroupTable
+## Класс SectionElementTable
 
 Пространство имён: `Bitrix\Iblock`
 
- 
-Class IblockGroupTable 
- 
-@package Bitrix\Iblock 
 
 
 #### Оглавление:
 
 * Методы:
-    * Собственные методы [3]:
+    * Собственные методы [2]:
 
         * [Метод getTableName](#метод-getTableName)
         * [Метод getMap](#метод-getMap)
-        * [Метод validatePermission](#метод-validatePermission)
 
     * Унаследованные методы [7]:
 
@@ -68,6 +63,17 @@ public static getTableName()
 
 [к оглавлению](#оглавление)
 
+Примеры использования: 
+
+Пример 1
+
+```php
+// use Bitrix\Main\Loader;
+// Loader::includeModule("iblock");
+$ttgtnex1 = SectionElementTable::getTableName();        // "b_iblock_section_element"
+
+```
+
 ![s](/asset/image/separator/30x30.png)
 
 
@@ -90,27 +96,51 @@ public static getMap()
 
 [к оглавлению](#оглавление)
 
-![s](/asset/image/separator/30x30.png)
+Примеры использования: 
 
-
-#### Метод **validatePermission**
-
-Описание: 
-Returns validators for PERMISSION field.
-
-Сигнатура: 
+Пример 1
 
 ```php
-public static validatePermission()
+$ttgnex11keys = array_keys(SectionElementTable::getMap());
+/* Array
+(
+    [0] => IBLOCK_SECTION_ID                // primary key
+    [1] => IBLOCK_ELEMENT_ID                // primary key
+    [2] => ADDITIONAL_PROPERTY_ID
+    [3] => IBLOCK_SECTION                   // reference key
+    [4] => IBLOCK_ELEMENT                   // reference key
+    [5] => 0                                // reference key
+)*/
+$ttgnex11 = SectionElementTable::getMap();
+/* keys:
+    primary   => ID
+    reference => [
+        IBLOCK_SECTION_ID => Bitrix\Iblock\Section.ID,
+        IBLOCK_ELEMENT_ID => Bitrix\Iblock\Element.ID,
+        IBLOCK_ELEMENT_ID => Bitrix\Iblock\ORM\CommonElement.ID,
+    ]
+*/
+
 ```
+Пример 2
 
-Возвращаемое значение: 
+```php
+$SectionElementTable = new \ReflectionClass(SectionElementTable::class);
+$lc = $SectionElementTable->getConstants();
+/* Array
+(
+    [EVENT_ON_BEFORE_ADD] => OnBeforeAdd
+    [EVENT_ON_ADD] => OnAdd
+    [EVENT_ON_AFTER_ADD] => OnAfterAdd
+    [EVENT_ON_BEFORE_UPDATE] => OnBeforeUpdate
+    [EVENT_ON_UPDATE] => OnUpdate
+    [EVENT_ON_AFTER_UPDATE] => OnAfterUpdate
+    [EVENT_ON_BEFORE_DELETE] => OnBeforeDelete
+    [EVENT_ON_DELETE] => OnDelete
+    [EVENT_ON_AFTER_DELETE] => OnAfterDelete
+) */
 
-| Тип | Описание |
-| :--- | :--- |
-| array |  |
-
-[к оглавлению](#оглавление)
+```
 
 ![s](/asset/image/separator/30x30.png)
 
@@ -134,11 +164,10 @@ public static validatePermission()
 ```php
 // use Bitrix\Main\Loader;
 // Loader::includeModule("iblock");
-$igtglex1 = IblockGroupTable::getList([
-    'filter' => ['IBLOCK_ID' => 5],
-    'select' => ['GROUP_ID', 'PERMISSION']
+$itgdex1 = SectionElementTable::getList([
+    'select' => ['IBLOCK_SECTION_ID']
 ]);
-$igtglex1result = $igtglex1->fetchAll();
+$itgdex1datafirst = $itgdex1->fetchAll();
 ```
 [к оглавлению](#оглавление)
 
@@ -149,15 +178,15 @@ $igtglex1result = $igtglex1->fetchAll();
 Пример 1:
 
 ```php
-$status = false;
+
 try
 {
-    $igtaex1result = IblockGroupTable::add([
-        'IBLOCK_ID' => 5,
-        'GROUP_ID'  => 3,
-        'PERMISSION' => 'R',
+    $setaex1result = SectionElementTable::add([
+        'IBLOCK_SECTION_ID' => 28,
+        'IBLOCK_ELEMENT_ID' => 322,
+        'ADDITIONAL_PROPERTY_ID' => null
     ]);
-    $status = true;
+    
 }
 catch (Exception $e)
 {
@@ -172,9 +201,21 @@ catch (Exception $e)
 Пример 1:
 
 ```php
-$igtuex1result = IblockGroupTable::update(['IBLOCK_ID' => 5,'GROUP_ID'  => 3],[
-    'PERMISSION' => 'X',
-]);
+try
+{
+    // not work
+    $setuex1result = SectionElementTable::update([
+        'IBLOCK_SECTION_ID' => 28,
+        'IBLOCK_ELEMENT_ID' => 322,
+    ],
+    [
+        'IBLOCK_ELEMENT_ID' => 324,
+    ]);
+}
+catch (\Exception $e)
+{
+    //
+}
 ```
 [к оглавлению](#оглавление)
 
@@ -185,9 +226,9 @@ $igtuex1result = IblockGroupTable::update(['IBLOCK_ID' => 5,'GROUP_ID'  => 3],[
 Пример 1:
 
 ```php
-$igtdex1result = IblockGroupTable::delete([
-    'IBLOCK_ID' => 5,
-    'GROUP_ID'  => 3,
+$setdex1result = SectionElementTable::delete([
+    'IBLOCK_SECTION_ID' => 28,
+    'IBLOCK_ELEMENT_ID' => 322,
 ]);
 ```
 [к оглавлению](#оглавление)
@@ -203,19 +244,10 @@ $igtdex1result = IblockGroupTable::delete([
 ```php
 // use Bitrix\Main\Loader;
 // Loader::includeModule("iblock");
-$igtqex1 = IblockGroupTable::query()
-         ->setFilter(['IBLOCK_ID' => 5])
-         ->setSelect(['GROUP_ID', 'PERMISSION']);
-$igtqex1result1 = $igtqex1->exec();
-$igtqex1result2 = $igtqex1->exec();
-$igtqex1datafirst = $igtqex1result2->fetch();
-$igtqex1data  = [];
-$igtqex1count = 0;
-while ($igtqex1row = $igtqex1result1->fetch())
-{
-    array_push($igtqex1data, $igtqex1row);
-    $igtqex1count++;
-}
+$setqex1 = SectionElementTable::query()
+         ->setFilter(['IBLOCK_SECTION_ID' => 15])
+         ->setSelect(['IBLOCK_ELEMENT_ID']);
+$setqex1result1 = $setqex1->exec()->fetchAll();
 ```
 [к оглавлению](#оглавление)
 
@@ -226,11 +258,10 @@ while ($igtqex1row = $igtqex1result1->fetch())
 Пример 1:
 
 ```php
-$igta1 = IblockGroupTable::createObject();
-$igta1result =  $igta1->setIblockId(5)
-                      ->setGroupId(3)
-                      ->setPermission('S')
-                      ->save();
+$seta1 = SectionElementTable::createObject();
+$seta1result =$seta1->setIblockSectionId(16)
+                    ->setIblockElementId(320)
+                    ->save();
 ```
 [к оглавлению](#оглавление)
 
@@ -241,9 +272,14 @@ $igta1result =  $igta1->setIblockId(5)
 Пример 1:
 
 ```php
-$igtu1 = IblockGroupTable::getByPrimary(['IBLOCK_ID' => 5,'GROUP_ID'  => 3])->fetchObject();
-$igtu1result = $igtu1->setPermission('R')
+$setu1 = SectionElementTable::getByPrimary([
+    'IBLOCK_SECTION_ID' => 16,
+    'IBLOCK_ELEMENT_ID' => 320,
+])->fetchObject();
+$setu1result = $setu1->setIblockElementId(120)
                      ->save();
+// Setting value for Primary `IBLOCK_ELEMENT_ID` in `Bitrix\Iblock\EO_SectionElement`
+// is not allowed, it is read-only field (0)
 ```
 [к оглавлению](#оглавление)
 
@@ -256,12 +292,15 @@ $igtu1result = $igtu1->setPermission('R')
 ```php
 try
 {
-    $igtd1 = IblockGroupTable::getByPrimary(['IBLOCK_ID' => 5,'GROUP_ID'  => 3])->fetchObject();
-         $igtd1result = $igtd1->delete();
+    $setd1 = SectionElementTable::getByPrimary([
+        'IBLOCK_SECTION_ID' => 16,
+        'IBLOCK_ELEMENT_ID' => 320,
+    ])->fetchObject();
+    $setd1result = $setd1->delete();
 }
 catch (\Throwable $e)
 {
-    //if $igtd1 == null
+    //if $setd1 == null
 }
 ```
 [к оглавлению](#оглавление)

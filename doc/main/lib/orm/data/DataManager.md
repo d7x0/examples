@@ -2,7 +2,9 @@
 
 Пространство имён: `Bitrix\Main\ORM\Data`
 
-Base entity data manager
+ 
+Base entity data manager 
+
 
 #### Оглавление:
 

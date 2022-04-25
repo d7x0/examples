@@ -2,129 +2,102 @@
 
 Пространство имён: `Bitrix\Main\ORM\Query`
 
+ 
 Query builder for Entities. 
-
+ 
 Virtual WHERE methods (proxy to Filter): 
-
+ 
 @method $this where(...$filter) 
-
 @see Filter::where() 
-
+ 
 @method $this whereNot(...$filter) 
-
 @see Filter::whereNot() 
-
+ 
 @method $this whereColumn(...$filter) 
-
 @see Filter::whereColumn() 
-
+ 
 @method $this whereNull($column) 
-
 @see Filter::whereNull() 
-
+ 
 @method $this whereNotNull($column) 
-
 @see Filter::whereNotNull() 
-
+ 
 @method $this whereIn($column, $values) 
-
 @see Filter::whereIn() 
-
+ 
 @method $this whereNotIn($column, $values) 
-
 @see Filter::whereNotIn() 
-
+ 
 @method $this whereBetween($column, $valueMin, $valueMax) 
-
 @see Filter::whereBetween() 
-
+ 
 @method $this whereNotBetween($column, $valueMin, $valueMax) 
-
 @see Filter::whereNotBetween() 
-
+ 
 @method $this whereLike($column, $value) 
-
 @see Filter::whereLike() 
-
+ 
 @method $this whereNotLike($column, $value) 
-
 @see Filter::whereNotLike() 
-
+ 
 @method $this whereExists($query) 
-
 @see Filter::whereExists() 
-
+ 
 @method $this whereNotExists($query) 
-
 @see Filter::whereNotExists() 
-
+ 
 @method $this whereMatch($column, $value) 
-
 @see Filter::whereMatch() 
-
+ 
 @method $this whereNotMatch($column, $value) 
-
 @see Filter::whereNotMatch() 
-
+ 
 @method $this whereExpr($expr, $arguments) 
-
 @see Filter::whereExpr() 
-
+ 
 Virtual HAVING methods (proxy to Filter): 
-
+ 
 @method $this having(...$filter) 
-
 @see Filter::where() 
-
+ 
 @method $this havingNot(...$filter) 
-
 @see Filter::whereNot() 
-
+ 
 @method $this havingColumn(...$filter) 
-
 @see Filter::whereColumn() 
-
+ 
 @method $this havingNull($column) 
-
 @see Filter::whereNull() 
-
+ 
 @method $this havingNotNull($column) 
-
 @see Filter::whereNotNull() 
-
+ 
 @method $this havingIn($column, $values) 
-
 @see Filter::whereIn() 
-
+ 
 @method $this havingNotIn($column, $values) 
-
 @see Filter::whereNotIn() 
-
+ 
 @method $this havingBetween($column, $valueMin, $valueMax) 
-
 @see Filter::whereBetween() 
-
+ 
 @method $this havingNotBetween($column, $valueMin, $valueMax) 
-
 @see Filter::whereNotBetween() 
-
+ 
 @method $this havingLike($column, $value) 
-
 @see Filter::whereLike() 
-
+ 
 @method $this havingNotLike($column, $value) 
-
 @see Filter::whereNotLike() 
-
+ 
 @method $this havingExists($query) 
-
 @see Filter::whereExists() 
-
+ 
 @method $this havingNotExists($query) 
-
 @see Filter::whereNotExists() 
+ 
+@package Bitrix\Main\ORM 
 
-@package Bitrix\Main\ORM
 
 #### Оглавление:
 

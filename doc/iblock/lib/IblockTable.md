@@ -2,9 +2,11 @@
 
 Пространство имён: `Bitrix\Iblock`
 
+ 
 Class IblockTable 
+ 
+@package Bitrix\Iblock 
 
-@package Bitrix\Iblock
 
 #### Оглавление:
 
