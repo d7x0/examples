@@ -7,7 +7,8 @@ Class ElementTable
  
 Методы `add`, `update`, `delete` заблокированы, поэтому вместо класса `ElementTable` 
 нужно создать новый класс сущности для таблицы `b_iblock_element` 
-см. [ссылка](https:dev.1c-bitrix.rulearningcourseindex.php?COURSE_ID=43&LESSON_ID=4803). 
+см. [ссылка] 
+(https:dev.1c-bitrix.rulearningcourseindex.php?COURSE_ID=43&LESSON_ID=4803). 
 Cущность должна иметь два метода `getTableName` и `getMap` 
  
 @package Bitrix\Iblock 
@@ -451,9 +452,6 @@ $stglex2result = $stglex2->fetch();
 $iblockSectionId = intval($stglex2result['ID']);
 try
 {
-    // Если вручную создать тип, инфоблок и два раздела один вложен в другой
-    // то дублирования строк не будет в таблицах b_iblock_element и b_iblock_section_element при
-    // сохранении через админпанель элемента добавленного через D7
     // add new element
     $etaex1result = ElementTable::add([
         'TIMESTAMP_X' => new \Bitrix\Main\Type\DateTime(),
@@ -502,7 +500,7 @@ $queryResponse = $connection->query("
     SELECT MAX(ID) AS ID_MAX FROM b_iblock_element WHERE IBLOCK_ID = $iblockId
 ")->fetch();
 $idMax = intval($queryResponse['ID_MAX']);
-$etuex1result = ElementTable::update(321, [
+$etuex1result = ElementTable::update($idMax, [
     'NAME' => 'Мира, пр-т, 8-a'
 ]);
 ```

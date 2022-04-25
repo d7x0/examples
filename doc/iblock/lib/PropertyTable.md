@@ -434,7 +434,9 @@ $status = false;
 try
 {
     $ptaex1result = PropertyTable::add([
-        'IBLOCK_ID'      => $id,
+        'IBLOCK_ID' => $id,
+        'CODE'      => 'FUEL_COUNT',
+        'NAME'      => 'Расход топлива',
     ]);
     $status = true;
 }
@@ -461,11 +463,11 @@ $queryResponse = $connection->query("
     SELECT MAX(ID) AS ID_MAX FROM b_iblock_property WHERE IBLOCK_ID = $id
 ")->fetch();
 $idMax = intval($queryResponse['ID_MAX']);
-$ptuex1result = PropertyTable::update($idMax, [
-    'NAME' => 'Цвет',
-    'CODE' => 'COLOR',
+$ptuex1result = PropertyTable::update($idMax,
+[
     'ACTIVE'        => 'Y',
     'PROPERTY_TYPE' => 'S',
+    'LINK_IBLOCK_ID' => null,
 ]);
 ```
 [к оглавлению](#оглавление)

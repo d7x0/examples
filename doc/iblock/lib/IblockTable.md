@@ -132,7 +132,7 @@ $itgnex11     = IblockTable::getMap();
 $itgnex11keys = array_keys(IblockTable::getMap());      // Array, count = 35, in db table b_iblock have count = 43
 /* Array
 (
-    [0] => ID
+    [0] => ID                       // primary key
     [1] => TIMESTAMP_X
     [2] => IBLOCK_TYPE_ID
     [3] => LID
@@ -672,18 +672,32 @@ while ($itgdex1row = $itgdex1->fetchAll())
 Пример 1:
 
 ```php
-$status = false;
 try
 {
+    //add iblock
     $itadex1result = IblockTable::add([
         'IBLOCK_TYPE_ID' => 'delivery',
         'LID'            => 's1',
         'CODE'           => 'delivery-city',
         'NAME'           => 'Доставка по городу',
+        'INDEX_SECTION'  => 'Y',
+        'WORKFLOW'       => 'N',
+        'LIST_MODE'      => '',
+        'SECTION_PROPERTY' => 'N',
+        'PROPERTY_INDEX'   => 'N',
+        'SECTIONS_NAME' => 'Разделы',
+        'SECTION_NAME'  => 'Раздел',
+        'ELEMENTS_NAME' => 'Элементы',
+        'ELEMENT_NAME'  => 'Элемент',
     ]);
-    $status = true;
+    $iblockId = $itadex1result->getId();
+    // link to site
+    $istadex1result =  IblockSiteTable::add([
+        'IBLOCK_ID' => $iblockId,
+        'SITE_ID'   => 's1',
+    ]);
 }
-catch (Exception $e)
+catch (\Exception $e)
 {
 }
 ```
@@ -696,8 +710,14 @@ catch (Exception $e)
 Пример 1:
 
 ```php
-$itudex1result = IblockTable::update(2, [
-    'NAME' => 'Одежда А'
+$itgdex1 = IblockTable::getList([
+    'filter' => ['CODE' => 'delivery-city'],
+    'select' => ['ID']
+]);
+$itgdex1datafirst = $itgdex1->fetch();
+$iblockId = intval($itgdex1datafirst['ID']);
+$itudex1result = IblockTable::update($iblockId, [
+    'SECTIONS_NAME' => 'ST',
 ]);
 ```
 [к оглавлению](#оглавление)
@@ -714,6 +734,11 @@ $queryResponse = $connection->query("
     SELECT ID FROM b_iblock WHERE CODE LIKE 'delivery-city'
 ")->fetch();
 $id = intval($queryResponse['ID']);
+// unlink to site
+$istadex1result =  IblockSiteTable::delete([
+    'IBLOCK_ID' => $id,
+    'SITE_ID'   => 's1',
+]);
 $itddex1result = IblockTable::delete($id);
 ```
 [к оглавлению](#оглавление)
