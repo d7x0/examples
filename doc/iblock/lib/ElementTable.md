@@ -7,8 +7,7 @@ Class ElementTable
  
 Методы `add`, `update`, `delete` заблокированы, поэтому вместо класса `ElementTable` 
 нужно создать новый класс сущности для таблицы `b_iblock_element` 
-см. [ссылка] 
-(https:dev.1c-bitrix.rulearningcourseindex.php?COURSE_ID=43&LESSON_ID=4803). 
+см. [ссылка](https:dev.1c-bitrix.rulearningcourseindex.php?COURSE_ID=43&LESSON_ID=4803). 
 Cущность должна иметь два метода `getTableName` и `getMap` 
  
 @package Bitrix\Iblock 
