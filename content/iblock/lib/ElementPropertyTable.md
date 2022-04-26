@@ -10,8 +10,9 @@
 #### Оглавление:
 
 * Методы:
-    * Собственные методы [0]:
+    * Собственные методы [1]:
 
+        * [Метод getMap](#метод-getMap)
 
     * Унаследованные методы [7]:
 
@@ -43,6 +44,58 @@
 
 # Методы
 ## Собственные методы
+
+
+#### Метод **getMap**
+
+Описание: 
+Returns entity map definition.
+
+Сигнатура: 
+
+```php
+public static getMap()
+```
+
+Возвращаемое значение: 
+
+| Тип | Описание |
+| :--- | :--- |
+| array |  |
+
+[к оглавлению](#оглавление)
+
+Примеры использования: 
+
+Пример 1
+
+```php
+$ttgnex11keys = array_keys(ElementPropertyTable::getMap());
+/* Array
+(
+    [0] => ID                       // primary key
+    [1] => IBLOCK_PROPERTY_ID
+    [2] => IBLOCK_ELEMENT_ID
+    [3] => ELEMENT                  // reference
+    [4] => VALUE
+    [5] => VALUE_TYPE
+    [6] => VALUE_ENUM
+    [7] => VALUE_NUM
+    [8] => DESCRIPTION
+    [9] => ENUM                     // reference
+)*/
+$ttgnex11 = ElementPropertyTable::getMap();
+/* keys:
+    primary   => ID
+    reference => [
+        IBLOCK_ELEMENT_ID => Bitrix\Iblock\ElementTable.ID,
+        VALUE_ENUM        => Bitrix\Iblock\PropertyEnumerationTable.ID,
+    ]
+*/
+
+```
+
+![s](/asset/image/separator/30x30.png)
 
 
 
