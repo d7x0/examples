@@ -1,7 +1,7 @@
 # PHP Framework D7 Examples
 
-Unofficial examples for D7 Framework. All rights to the D7 framework code reseverd to [1C-Bitrix](https://www.1c-bitrix.ru/) Company.
+![b](https://img.shields.io/badge/size-590kb-informational)
 
-Examples building for next dates(branches):
+This branch contain examples actually for **April 2022** date.
 
-* 2022-04-20
+For view all existing examples, open `README.MD` in `master` git branch and click to link formatted like this: `Yeat-month-v-Version`
