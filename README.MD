@@ -4,4 +4,4 @@
 
 This branch contain examples actually for **April 2022** date.
 
-For view all existing examples, open `README.MD` in `master` git branch and click to link formatted like this: `Yeat-month-v-Version`
+For view all existing examples, open `README.MD` in [master](https://github.com/d7xz/examples/tree/master) git branch and click to link formatted like this: `Year-month-v-Version`
