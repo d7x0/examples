@@ -17,6 +17,30 @@ Class IblockSiteTable
         * [Метод getMap](#метод-getMap)
         * [Метод validateSiteId](#метод-validateSiteId)
 
+    * Унаследованные методы [7]:
+
+        * [Метод getList](/doc/main/lib/orm/data/DataManager.md#метод-getList)
+        * [Метод add](/doc/main/lib/orm/data/DataManager.md#метод-add)
+        * [Метод update](/doc/main/lib/orm/data/DataManager.md#метод-update)
+        * [Метод delete](/doc/main/lib/orm/data/DataManager.md#метод-delete)
+        * [Метод query](/doc/main/lib/orm/data/DataManager.md#метод-query)
+        * [Метод getByPrimary](/doc/main/lib/orm/data/DataManager.md#метод-getByPrimary)
+        * [Метод createObject](/doc/main/lib/orm/data/DataManager.md#метод-createObject)
+
+* Примеры:
+
+    * [Старый стиль](#старый-стиль)
+        * Получение списка элементов
+        * Добавление нового элемента
+        * Обновление существующего элемента
+        * Удаление существующего элемента
+
+    * [Объектный стиль](#объектный-стиль)
+        * Получение списка элементов
+        * Добавление нового элемента
+        * Обновление существующего элемента
+        * Удаление существующего элемента
+
 ![s](/asset/image/separator/30x30.png)
 
 ![s](/asset/image/separator/30x30.png)
@@ -143,6 +167,170 @@ public static validateSiteId()
 ![s](/asset/image/separator/30x30.png)
 
 
+
+## Унаследованные методы
+Описание методов см. класс [`Bitrix\Main\ORM\Data\DataManager`](/doc/main/lib/orm/data/DataManager.md)
+
+![s](/asset/image/separator/30x30.png)
+
+![s](/asset/image/separator/30x30.png)
+
+# Примеры
+
+### Старый стиль
+
+#### Получение списка элементов
+
+Пример 1:
+
+```php
+// use Bitrix\Main\Loader;
+// Loader::includeModule("iblock");
+$istgdex1 =  IblockSiteTable::getList([
+    'select' => ['IBLOCK_ID', 'SITE_ID']
+]);
+$istgdex1datafirst = $istgdex1->fetch();
+$istgdex1data  = [];
+$istgdex1count = 0;
+while ($istgdex1row = $istgdex1->fetch())
+{
+    array_push($istgdex1data, $istgdex1row);
+    $istgdex1count++;
+}
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Добавление нового элемента
+
+Пример 1:
+
+```php
+try
+{
+    $istadex1result =  IblockSiteTable::add([
+        'IBLOCK_ID' => 16,
+        'SITE_ID'   => 's1',
+    ]);
+}
+catch (\Exception $e)
+{
+}
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Обновление существующего элемента
+
+Пример 1:
+
+```php
+$istudex1result =  IblockSiteTable::update([
+    'IBLOCK_ID' => 16,
+    'SITE_ID'   => 's1',
+],
+[
+    'SITE_ID'   => 's2',
+]);
+// $istudex1result->getId() = null
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Удаление существующего элемента
+
+Пример 1:
+
+```php
+$istddex1result =  IblockSiteTable::delete([
+    'IBLOCK_ID' => 16,
+    'SITE_ID'   => 's1',
+]);
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+### Объектный стиль
+
+#### Получение списка элементов
+
+Пример 1:
+
+```php
+// use Bitrix\Main\Loader;
+// Loader::includeModule("iblock");
+$istqex1 =  IblockSiteTable::query()
+         ->setSelect(['IBLOCK_ID', 'SITE_ID']);
+$istqex1result1 = $istqex1->exec();
+$istqex1result2 = $istqex1->exec();
+$istqex1datafirst = $istqex1result2->fetch();
+$istqex1data  = [];
+$istqex1count = 0;
+while ($istqex1row = $istqex1result1->fetch())
+{
+    array_push($istqex1data, $istqex1row);
+    $istqex1count++;
+}
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Добавление нового элемента
+
+Пример 1:
+
+```php
+$ista1 =  IblockSiteTable::createObject();
+$ista1result =  $ista1->setIblockId(8)
+                      ->setSiteId('s2')
+                      ->save();
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Обновление существующего элемента
+
+Пример 1:
+
+```php
+try
+{
+    $istu1 =  IblockSiteTable::getByPrimary([
+        'IBLOCK_ID' => 8,
+        'SITE_ID'   => 's2',
+    ])->fetchObject();
+    $istu1result = $istu1->setSiteId('s8')
+        ->save();
+}
+catch (\Exception $e)
+{
+    // Setting value for Primary `SITE_ID` in `Bitrix\Iblock\EO_IblockSite`
+    // is not allowed, it is read-only field
+}
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+#### Удаление существующего элемента
+
+Пример 1:
+
+```php
+$istd1result =  IblockSiteTable::getByPrimary([
+    'IBLOCK_ID' => 8,
+    'SITE_ID'   => 's2',
+])->fetchObject()->delete();
+```
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
 
 
 

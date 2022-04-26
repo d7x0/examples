@@ -462,9 +462,6 @@ try
         'DETAIL_TEXT_TYPE' => "text",
     ]);
     $etaIdInsert = $etaex1result->getId();
-        'IBLOCK_ID'           => $iblockId,
-        'IBLOCK_SECTION_ID'   => $iblockSectionId,
-    ]);
     // update exist element XML_ID
     $etuex1result = ElementTable::update($etaIdInsert, [
         'XML_ID' => $etaIdInsert
@@ -476,7 +473,7 @@ try
         'ADDITIONAL_PROPERTY_ID' => null
     ]);
 }
-catch (Exception $e)
+catch (\Exception $e)
 {
 }
 ```

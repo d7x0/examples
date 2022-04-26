@@ -320,7 +320,7 @@ try
     ]);
     $status = true;
 }
-catch (Exception $e)
+catch (\Exception $e)
 {
 }
 ```
@@ -353,7 +353,7 @@ try
     ]);
     $status = true;
 }
-catch (Exception $e)
+catch (\Exception $e)
 {
 }
 ```

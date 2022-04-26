@@ -1,21 +1,17 @@
-## Класс IblockGroupTable
+## Класс ElementPropertyTable
 
 Пространство имён: `Bitrix\Iblock`
 
  
-Class IblockGroupTable 
- 
-@package Bitrix\Iblock 
+@package    bitrix 
+@subpackage iblock 
 
 
 #### Оглавление:
 
 * Методы:
-    * Собственные методы [3]:
+    * Собственные методы [0]:
 
-        * [Метод getTableName](#метод-getTableName)
-        * [Метод getMap](#метод-getMap)
-        * [Метод validatePermission](#метод-validatePermission)
 
     * Унаследованные методы [7]:
 
@@ -49,72 +45,6 @@ Class IblockGroupTable
 ## Собственные методы
 
 
-#### Метод **getTableName**
-
-Описание: 
-Returns DB table name for entity
-
-Сигнатура: 
-
-```php
-public static getTableName()
-```
-
-Возвращаемое значение: 
-
-| Тип | Описание |
-| :--- | :--- |
-| string |  |
-
-[к оглавлению](#оглавление)
-
-![s](/asset/image/separator/30x30.png)
-
-
-#### Метод **getMap**
-
-Описание: 
-Returns entity map definition.
-
-Сигнатура: 
-
-```php
-public static getMap()
-```
-
-Возвращаемое значение: 
-
-| Тип | Описание |
-| :--- | :--- |
-| array |  |
-
-[к оглавлению](#оглавление)
-
-![s](/asset/image/separator/30x30.png)
-
-
-#### Метод **validatePermission**
-
-Описание: 
-Returns validators for PERMISSION field.
-
-Сигнатура: 
-
-```php
-public static validatePermission()
-```
-
-Возвращаемое значение: 
-
-| Тип | Описание |
-| :--- | :--- |
-| array |  |
-
-[к оглавлению](#оглавление)
-
-![s](/asset/image/separator/30x30.png)
-
-
 
 ## Унаследованные методы
 Описание методов см. класс [`Bitrix\Main\ORM\Data\DataManager`](/doc/main/lib/orm/data/DataManager.md)
@@ -134,11 +64,30 @@ public static validatePermission()
 ```php
 // use Bitrix\Main\Loader;
 // Loader::includeModule("iblock");
-$igtglex1 = IblockGroupTable::getList([
-    'filter' => ['IBLOCK_ID' => 5],
-    'select' => ['GROUP_ID', 'PERMISSION']
+$itgdex1 = IblockTable::getList([
+    'filter' => ['CODE' => 'delivery-city'],
+    'select' => ['ID']
 ]);
-$igtglex1result = $igtglex1->fetchAll();
+$itgdex1datafirst = $itgdex1->fetch();
+$iblockId = $itgdex1datafirst['ID'];
+$eptglex1 = ElementTable::getList([
+    'filter' => ['IBLOCK_SECTION_ID' => 17, 'IBLOCK_ID' => $iblockId],
+    'select' => ['ID', 'NAME']
+]);
+$eptglex1res = [];
+while($eptglex1row = $eptglex1->fetch())
+{
+    if(is_array($eptglex1res[$eptglex1row['ID']]))
+    {
+        $eptglex1res[$eptglex1row['ID']] = [];
+    }
+        $eptglex1res[$eptglex1row['ID']]['NAME'] = $eptglex1row['NAME'];
+    $eptglex1prq = ElementPropertyTable::getList([
+        'filter' => ['IBLOCK_ELEMENT_ID' => $eptglex1row['ID']],
+        'select' => ['IBLOCK_PROPERTY_ID', 'VALUE']
+    ]);
+    $eptglex1res[$eptglex1row['ID']]['PROP'] = $eptglex1prq->fetchAll();
+}
 ```
 [к оглавлению](#оглавление)
 
@@ -149,15 +98,16 @@ $igtglex1result = $igtglex1->fetchAll();
 Пример 1:
 
 ```php
-$status = false;
 try
 {
-    $igtaex1result = IblockGroupTable::add([
-        'IBLOCK_ID' => 5,
-        'GROUP_ID'  => 3,
-        'PERMISSION' => 'R',
+    // add new element
+    $eptaex1result = ElementPropertyTable::add([
+        'IBLOCK_ELEMENT_ID'   => 320,
+        'IBLOCK_PROPERTY_ID'  => 25,
+        'VALUE'               => "64 000",
+        'VALUE_TYPE'          => "text",
     ]);
-    $status = true;
+    $eptaIdInsert = $eptaex1result->getId();
 }
 catch (\Exception $e)
 {
@@ -172,8 +122,14 @@ catch (\Exception $e)
 Пример 1:
 
 ```php
-$igtuex1result = IblockGroupTable::update(['IBLOCK_ID' => 5,'GROUP_ID'  => 3],[
-    'PERMISSION' => 'X',
+$eptglex1prq = ElementPropertyTable::getList([
+    'filter' => ['IBLOCK_ELEMENT_ID' => 320, 'IBLOCK_PROPERTY_ID' => 25],
+    'select' => ['ID']
+]);
+$eptglex1prqres = $eptglex1prq->fetch();
+$prId = $eptglex1prqres['ID'];
+$eptuex1result = ElementPropertyTable::update($prId, [
+    'VALUE' => '132 000'
 ]);
 ```
 [к оглавлению](#оглавление)
@@ -185,10 +141,13 @@ $igtuex1result = IblockGroupTable::update(['IBLOCK_ID' => 5,'GROUP_ID'  => 3],[
 Пример 1:
 
 ```php
-$igtdex1result = IblockGroupTable::delete([
-    'IBLOCK_ID' => 5,
-    'GROUP_ID'  => 3,
+$eptglex1prq = ElementPropertyTable::getList([
+    'filter' => ['IBLOCK_ELEMENT_ID' => 320, 'IBLOCK_PROPERTY_ID' => 25],
+    'select' => ['ID']
 ]);
+$eptglex1prqres = $eptglex1prq->fetch();
+$prId = $eptglex1prqres['ID'];
+$eptuex1result = ElementPropertyTable::delete($prId);
 ```
 [к оглавлению](#оглавление)
 
@@ -203,18 +162,27 @@ $igtdex1result = IblockGroupTable::delete([
 ```php
 // use Bitrix\Main\Loader;
 // Loader::includeModule("iblock");
-$igtqex1 = IblockGroupTable::query()
-         ->setFilter(['IBLOCK_ID' => 5])
-         ->setSelect(['GROUP_ID', 'PERMISSION']);
-$igtqex1result1 = $igtqex1->exec();
-$igtqex1result2 = $igtqex1->exec();
-$igtqex1datafirst = $igtqex1result2->fetch();
-$igtqex1data  = [];
-$igtqex1count = 0;
-while ($igtqex1row = $igtqex1result1->fetch())
+$itqex1 = IblockTable::query()
+    ->setFilter(['CODE' => 'delivery-city'])
+    ->setSelect(['CODE', 'ID']);
+$itqex1result1 = $itqex1->exec()->fetch();
+$iblockId = $itqex1result1['ID'];
+$etqex1 = ElementTable::query()
+         ->setFilter(['IBLOCK_SECTION_ID' => 17, 'IBLOCK_ID' => $iblockId])
+         ->setSelect(['ID', 'NAME']);
+$etqex1result1 = $etqex1->exec();
+$eptglex1res = [];
+while($eptglex1row = $etqex1result1->fetch())
 {
-    array_push($igtqex1data, $igtqex1row);
-    $igtqex1count++;
+    if(is_array($eptglex1res[$eptglex1row['ID']]))
+    {
+        $eptglex1res[$eptglex1row['ID']] = [];
+    }
+    $eptglex1res[$eptglex1row['ID']]['NAME'] = $eptglex1row['NAME'];
+    $eptglex1prq = ElementPropertyTable::query()
+                ->setFilter(['IBLOCK_ELEMENT_ID' => $eptglex1row['ID']])
+                ->setSelect(['IBLOCK_PROPERTY_ID', 'VALUE']);
+    $eptglex1res[$eptglex1row['ID']]['PROP'] = $eptglex1prq->fetchAll();
 }
 ```
 [к оглавлению](#оглавление)
@@ -226,11 +194,12 @@ while ($igtqex1row = $igtqex1result1->fetch())
 Пример 1:
 
 ```php
-$igta1 = IblockGroupTable::createObject();
-$igta1result =  $igta1->setIblockId(5)
-                      ->setGroupId(3)
-                      ->setPermission('S')
-                      ->save();
+$eta1 = ElementPropertyTable::createObject();
+$eta1result = $eta1 ->setIblockElementId(320)
+                    ->setIblockPropertyId(25)
+                    ->setValue('64 000')
+                    ->setValueType('text')
+                    ->save();
 ```
 [к оглавлению](#оглавление)
 
@@ -241,9 +210,14 @@ $igta1result =  $igta1->setIblockId(5)
 Пример 1:
 
 ```php
-$igtu1 = IblockGroupTable::getByPrimary(['IBLOCK_ID' => 5,'GROUP_ID'  => 3])->fetchObject();
-$igtu1result = $igtu1->setPermission('R')
-                     ->save();
+$eptglex1prq = ElementPropertyTable::query()
+            ->setFilter(['IBLOCK_ELEMENT_ID' => 320, 'IBLOCK_PROPERTY_ID' => 25])
+            ->setSelect(['ID']);
+$eptglex1res = $eptglex1prq->fetch();
+$prId = $eptglex1res['ID'];
+$itu1 = ElementPropertyTable::getByPrimary($prId)->fetchObject();
+$itu1result = $itu1 ->setValue('128 000')
+                    ->save();
 ```
 [к оглавлению](#оглавление)
 
@@ -254,15 +228,12 @@ $igtu1result = $igtu1->setPermission('R')
 Пример 1:
 
 ```php
-try
-{
-    $igtd1 = IblockGroupTable::getByPrimary(['IBLOCK_ID' => 5,'GROUP_ID'  => 3])->fetchObject();
-         $igtd1result = $igtd1->delete();
-}
-catch (\Throwable $e)
-{
-    //if $igtd1 == null
-}
+$eptglex1prq = ElementPropertyTable::query()
+            ->setFilter(['IBLOCK_ELEMENT_ID' => 320, 'IBLOCK_PROPERTY_ID' => 25])
+            ->setSelect(['ID']);
+$eptglex1res = $eptglex1prq->fetch();
+$prId = $eptglex1res['ID'];
+$itu1result = ElementPropertyTable::getByPrimary($prId)->fetchObject()->delete();
 ```
 [к оглавлению](#оглавление)
 

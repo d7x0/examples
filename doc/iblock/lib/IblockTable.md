@@ -685,10 +685,11 @@ try
         'LIST_MODE'      => '',
         'SECTION_PROPERTY' => 'N',
         'PROPERTY_INDEX'   => 'N',
-        'SECTIONS_NAME' => 'Разделы',
-        'SECTION_NAME'  => 'Раздел',
-        'ELEMENTS_NAME' => 'Элементы',
-        'ELEMENT_NAME'  => 'Элемент',
+        // добавляются в IblockMessageTable
+        // 'SECTIONS_NAME' => 'Разделы',
+        // 'SECTION_NAME'  => 'Раздел',
+        // 'ELEMENTS_NAME' => 'Элементы',
+        // 'ELEMENT_NAME'  => 'Элемент',
     ]);
     $iblockId = $itadex1result->getId();
     // link to site
@@ -696,6 +697,15 @@ try
         'IBLOCK_ID' => $iblockId,
         'SITE_ID'   => 's1',
     ]);
+    // add message - 10 rows
+    foreach (static::$messageList as $message)
+    {
+        IblockMessageTable::add([
+            'IBLOCK_ID'      => $iblockId,
+            'MESSAGE_ID'     => $message['MESSAGE_ID'],
+            'MESSAGE_TEXT'   => $message['MESSAGE_TEXT'],
+        ]);
+    }
 }
 catch (\Exception $e)
 {
@@ -740,6 +750,14 @@ $istadex1result =  IblockSiteTable::delete([
     'SITE_ID'   => 's1',
 ]);
 $itddex1result = IblockTable::delete($id);
+// delete message - 10 rows
+foreach (static::$messageList as $message)
+{
+    IblockMessageTable::delete([
+        'IBLOCK_ID'      => $id,
+        'MESSAGE_ID'     => $message['MESSAGE_ID'],
+    ]);
+}
 ```
 [к оглавлению](#оглавление)
 

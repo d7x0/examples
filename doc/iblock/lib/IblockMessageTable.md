@@ -1,16 +1,22 @@
-## Класс SectionElementTable
+## Класс IblockMessageTable
 
 Пространство имён: `Bitrix\Iblock`
 
+ 
+Class IblockMessageTable 
+ 
+@package Bitrix\Iblock 
 
 
 #### Оглавление:
 
 * Методы:
-    * Собственные методы [2]:
+    * Собственные методы [4]:
 
         * [Метод getTableName](#метод-getTableName)
         * [Метод getMap](#метод-getMap)
+        * [Метод validateMessageId](#метод-validateMessageId)
+        * [Метод validateMessageText](#метод-validateMessageText)
 
     * Унаследованные методы [7]:
 
@@ -70,7 +76,7 @@ public static getTableName()
 ```php
 // use Bitrix\Main\Loader;
 // Loader::includeModule("iblock");
-$ttgtnex1 = SectionElementTable::getTableName();        // "b_iblock_section_element"
+$itgtnex1 =  IblockMessageTable::getTableName();        // "b_iblock_messages"
 
 ```
 
@@ -101,23 +107,18 @@ public static getMap()
 Пример 1
 
 ```php
-$ttgnex11keys = array_keys(SectionElementTable::getMap());
-/* Array
-(
-    [0] => IBLOCK_SECTION_ID                // primary key
-    [1] => IBLOCK_ELEMENT_ID                // primary key
-    [2] => ADDITIONAL_PROPERTY_ID
-    [3] => IBLOCK_SECTION                   // reference key
-    [4] => IBLOCK_ELEMENT                   // reference key
-    [5] => 0                                // reference key
-)*/
-$ttgnex11 = SectionElementTable::getMap();
+$itgnex11     =  IblockMessageTable::getMap();
+$itgnex11keys = array_keys( IblockMessageTable::getMap());      // Array, count = 35, in db table b_iblock have count = 43
+/* Array (
+        [0] => IBLOCK_ID            // primary key
+        [1] => MESSAGE_ID           // primary key
+        [2] => MESSAGE_TEXT
+        [3] => IBLOCK               // reference key
+) */
 /* keys:
-    primary   => ID
+    primary   => IBLOCK_ID, MESSAGE_ID
     reference => [
-        IBLOCK_SECTION_ID => Bitrix\Iblock\Section.ID,
-        IBLOCK_ELEMENT_ID => Bitrix\Iblock\Element.ID,
-        IBLOCK_ELEMENT_ID => Bitrix\Iblock\ORM\CommonElement.ID,
+        IBLOCK_ID => Bitrix\Iblock\Iblock.ID,
     ]
 */
 
@@ -125,10 +126,9 @@ $ttgnex11 = SectionElementTable::getMap();
 Пример 2
 
 ```php
-$SectionElementTable = new \ReflectionClass(SectionElementTable::class);
-$lc = $SectionElementTable->getConstants();
-/* Array
-(
+$IblockMessageTable = new \ReflectionClass( IblockMessageTable::class);
+$lc = $IblockMessageTable->getConstants();
+/* Array (
     [EVENT_ON_BEFORE_ADD] => OnBeforeAdd
     [EVENT_ON_ADD] => OnAdd
     [EVENT_ON_AFTER_ADD] => OnAfterAdd
@@ -141,6 +141,50 @@ $lc = $SectionElementTable->getConstants();
 ) */
 
 ```
+
+![s](/asset/image/separator/30x30.png)
+
+
+#### Метод **validateMessageId**
+
+Описание: 
+Returns validators for MESSAGE_ID field.
+
+Сигнатура: 
+
+```php
+public static validateMessageId()
+```
+
+Возвращаемое значение: 
+
+| Тип | Описание |
+| :--- | :--- |
+| array |  |
+
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+
+#### Метод **validateMessageText**
+
+Описание: 
+Returns validators for MESSAGE_TEXT field.
+
+Сигнатура: 
+
+```php
+public static validateMessageText()
+```
+
+Возвращаемое значение: 
+
+| Тип | Описание |
+| :--- | :--- |
+| array |  |
+
+[к оглавлению](#оглавление)
 
 ![s](/asset/image/separator/30x30.png)
 
@@ -164,10 +208,19 @@ $lc = $SectionElementTable->getConstants();
 ```php
 // use Bitrix\Main\Loader;
 // Loader::includeModule("iblock");
-$itgdex1 = SectionElementTable::getList([
-    'select' => ['IBLOCK_SECTION_ID']
+$imtgdex1 =  IblockMessageTable::getList([
+    'filter' => ['IBLOCK_ID' => 4],
+    'select' => ['IBLOCK_ID', 'MESSAGE_ID', 'MESSAGE_TEXT']
 ]);
-$itgdex1datafirst = $itgdex1->fetchAll();
+$imtgdex1data  = [];
+while ($imtgdex1row = $imtgdex1->fetch())
+{
+    if(!is_array($imtgdex1data[$imtgdex1row['IBLOCK_ID']]))
+    {
+        $imtgdex1data[$imtgdex1row['IBLOCK_ID']] = [];
+    }
+        $imtgdex1data[$imtgdex1row['IBLOCK_ID']][$imtgdex1row['MESSAGE_ID']] = $imtgdex1row['MESSAGE_TEXT'];
+}
 ```
 [к оглавлению](#оглавление)
 
@@ -178,15 +231,16 @@ $itgdex1datafirst = $itgdex1->fetchAll();
 Пример 1:
 
 ```php
-
 try
 {
-    $setaex1result = SectionElementTable::add([
-        'IBLOCK_SECTION_ID' => 28,
-        'IBLOCK_ELEMENT_ID' => 322,
-        'ADDITIONAL_PROPERTY_ID' => null
-    ]);
-    
+    foreach (static::$messageList as $message)
+    {
+        IblockMessageTable::add([
+            'IBLOCK_ID'      => 16,
+            'MESSAGE_ID'     => $message['MESSAGE_ID'],
+            'MESSAGE_TEXT'   => $message['MESSAGE_TEXT'],
+        ]);
+    }
 }
 catch (\Exception $e)
 {
@@ -201,21 +255,13 @@ catch (\Exception $e)
 Пример 1:
 
 ```php
-try
-{
-    // not work
-    $setuex1result = SectionElementTable::update([
-        'IBLOCK_SECTION_ID' => 28,
-        'IBLOCK_ELEMENT_ID' => 322,
-    ],
-    [
-        'IBLOCK_ELEMENT_ID' => 324,
-    ]);
-}
-catch (\Exception $e)
-{
-    //
-}
+$imtudex1result =  IblockMessageTable::update([
+    'IBLOCK_ID'  => 16,
+    'MESSAGE_ID' => 'ELEMENTS_NAME',
+],
+[
+    'MESSAGE_TEXT'   => '# ..',
+]);
 ```
 [к оглавлению](#оглавление)
 
@@ -226,10 +272,13 @@ catch (\Exception $e)
 Пример 1:
 
 ```php
-$setdex1result = SectionElementTable::delete([
-    'IBLOCK_SECTION_ID' => 28,
-    'IBLOCK_ELEMENT_ID' => 322,
-]);
+foreach (static::$messageList as $message)
+{
+    IblockMessageTable::delete([
+        'IBLOCK_ID'      => 16,
+        'MESSAGE_ID'     => $message['MESSAGE_ID'],
+    ]);
+}
 ```
 [к оглавлению](#оглавление)
 
@@ -244,10 +293,19 @@ $setdex1result = SectionElementTable::delete([
 ```php
 // use Bitrix\Main\Loader;
 // Loader::includeModule("iblock");
-$setqex1 = SectionElementTable::query()
-         ->setFilter(['IBLOCK_SECTION_ID' => 15])
-         ->setSelect(['IBLOCK_ELEMENT_ID']);
-$setqex1result1 = $setqex1->exec()->fetchAll();
+$imtqex1 =  IblockMessageTable::query()
+         ->setFilter(['IBLOCK_ID' => 4])
+         ->setSelect(['IBLOCK_ID', 'MESSAGE_ID', 'MESSAGE_TEXT']);
+$imtqex1result1 = $imtqex1->exec();
+$imtqex1data  = [];
+while ($imtqex1row = $imtqex1result1->fetch())
+{
+    if(!is_array($imtqex1data[$imtqex1row['IBLOCK_ID']]))
+    {
+        $imtqex1data[$imtqex1row['IBLOCK_ID']] = [];
+    }
+        $imtqex1data[$imtqex1row['IBLOCK_ID']][$imtqex1row['MESSAGE_ID']] = $imtqex1row['MESSAGE_TEXT'];
+}
 ```
 [к оглавлению](#оглавление)
 
@@ -258,10 +316,14 @@ $setqex1result1 = $setqex1->exec()->fetchAll();
 Пример 1:
 
 ```php
-$seta1 = SectionElementTable::createObject();
-$seta1result =$seta1->setIblockSectionId(16)
-                    ->setIblockElementId(320)
-                    ->save();
+foreach (static::$messageList as $message)
+{
+    $imta1  = IblockMessageTable::createObject();
+    $imta1  ->setIblockId(8)
+            ->setMessageId($message['MESSAGE_ID'])
+            ->setMessageText($message['MESSAGE_TEXT'])
+            ->save();
+}
 ```
 [к оглавлению](#оглавление)
 
@@ -272,14 +334,18 @@ $seta1result =$seta1->setIblockSectionId(16)
 Пример 1:
 
 ```php
-$setu1 = SectionElementTable::getByPrimary([
-    'IBLOCK_SECTION_ID' => 16,
-    'IBLOCK_ELEMENT_ID' => 320,
-])->fetchObject();
-$setu1result = $setu1->setIblockElementId(120)
-                     ->save();
-// Setting value for Primary `IBLOCK_ELEMENT_ID` in `Bitrix\Iblock\EO_SectionElement`
-// is not allowed, it is read-only field (0)
+try
+{
+    $imtu1 =  IblockMessageTable::getByPrimary([
+        'IBLOCK_ID'  => 8,
+        'MESSAGE_ID' => 'ELEMENTS_NAME',
+    ])->fetchObject();
+    $imtu1result = $imtu1->setMessageText('## ..')
+        ->save();
+}
+catch (\Exception $e)
+{
+}
 ```
 [к оглавлению](#оглавление)
 
@@ -290,17 +356,12 @@ $setu1result = $setu1->setIblockElementId(120)
 Пример 1:
 
 ```php
-try
+foreach (static::$messageList as $message)
 {
-    $setd1 = SectionElementTable::getByPrimary([
-        'IBLOCK_SECTION_ID' => 16,
-        'IBLOCK_ELEMENT_ID' => 320,
-    ])->fetchObject();
-    $setd1result = $setd1->delete();
-}
-catch (\Throwable $e)
-{
-    //if $setd1 == null
+    IblockMessageTable::getByPrimary([
+        'IBLOCK_ID'      => 8,
+        'MESSAGE_ID'     => $message['MESSAGE_ID'],
+    ])->fetchObject()->delete();
 }
 ```
 [к оглавлению](#оглавление)
