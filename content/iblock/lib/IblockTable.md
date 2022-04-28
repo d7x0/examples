@@ -35,13 +35,13 @@ Class IblockTable
 
     * Унаследованные методы [7]:
 
-        * [Метод getList](/doc/main/lib/orm/data/DataManager.md#метод-getList)
-        * [Метод add](/doc/main/lib/orm/data/DataManager.md#метод-add)
-        * [Метод update](/doc/main/lib/orm/data/DataManager.md#метод-update)
-        * [Метод delete](/doc/main/lib/orm/data/DataManager.md#метод-delete)
-        * [Метод query](/doc/main/lib/orm/data/DataManager.md#метод-query)
-        * [Метод getByPrimary](/doc/main/lib/orm/data/DataManager.md#метод-getByPrimary)
-        * [Метод createObject](/doc/main/lib/orm/data/DataManager.md#метод-createObject)
+        * [Метод getList](/content/main/lib/orm/data/DataManager.md#метод-getList)
+        * [Метод add](/content/main/lib/orm/data/DataManager.md#метод-add)
+        * [Метод update](/content/main/lib/orm/data/DataManager.md#метод-update)
+        * [Метод delete](/content/main/lib/orm/data/DataManager.md#метод-delete)
+        * [Метод query](/content/main/lib/orm/data/DataManager.md#метод-query)
+        * [Метод getByPrimary](/content/main/lib/orm/data/DataManager.md#метод-getByPrimary)
+        * [Метод createObject](/content/main/lib/orm/data/DataManager.md#метод-createObject)
 
 * Примеры:
 
@@ -633,7 +633,7 @@ public static onAfterDelete($event)
 
 
 ## Унаследованные методы
-Описание методов см. класс [`Bitrix\Main\ORM\Data\DataManager`](/doc/main/lib/orm/data/DataManager.md)
+Описание методов см. класс [`Bitrix\Main\ORM\Data\DataManager`](/content/main/lib/orm/data/DataManager.md)
 
 ![s](/asset/image/separator/30x30.png)
 

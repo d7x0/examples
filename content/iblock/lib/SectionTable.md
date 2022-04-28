@@ -22,13 +22,13 @@ Class SectionTable
 
     * Унаследованные методы [7]:
 
-        * [Метод getList](/doc/main/lib/orm/data/DataManager.md#метод-getList)
-        * [Метод add](/doc/main/lib/orm/data/DataManager.md#метод-add)
-        * [Метод update](/doc/main/lib/orm/data/DataManager.md#метод-update)
-        * [Метод delete](/doc/main/lib/orm/data/DataManager.md#метод-delete)
-        * [Метод query](/doc/main/lib/orm/data/DataManager.md#метод-query)
-        * [Метод getByPrimary](/doc/main/lib/orm/data/DataManager.md#метод-getByPrimary)
-        * [Метод createObject](/doc/main/lib/orm/data/DataManager.md#метод-createObject)
+        * [Метод getList](/content/main/lib/orm/data/DataManager.md#метод-getList)
+        * [Метод add](/content/main/lib/orm/data/DataManager.md#метод-add)
+        * [Метод update](/content/main/lib/orm/data/DataManager.md#метод-update)
+        * [Метод delete](/content/main/lib/orm/data/DataManager.md#метод-delete)
+        * [Метод query](/content/main/lib/orm/data/DataManager.md#метод-query)
+        * [Метод getByPrimary](/content/main/lib/orm/data/DataManager.md#метод-getByPrimary)
+        * [Метод createObject](/content/main/lib/orm/data/DataManager.md#метод-createObject)
 
 * Примеры:
 
@@ -124,9 +124,9 @@ $ttgnex11keys = array_keys(SectionTable::getMap());
     [9] => SORT
     [10] => NAME                        // required field
     [11] => PICTURE
-    [12] => LEFT_MARGIN
-    [13] => RIGHT_MARGIN
-    [14] => DEPTH_LEVEL
+    [12] => LEFT_MARGIN                 // используется при выборке дерева разделов
+    [13] => RIGHT_MARGIN                // https://dev.1c-bitrix.ru/api_help/iblock/classes/ciblocksection/getlist.php
+    [14] => DEPTH_LEVEL                 //
     [15] => DESCRIPTION
     [16] => DESCRIPTION_TYPE            // required field
     [17] => SEARCHABLE_CONTENT
@@ -265,7 +265,7 @@ public static validateTmpId()
 
 
 ## Унаследованные методы
-Описание методов см. класс [`Bitrix\Main\ORM\Data\DataManager`](/doc/main/lib/orm/data/DataManager.md)
+Описание методов см. класс [`Bitrix\Main\ORM\Data\DataManager`](/content/main/lib/orm/data/DataManager.md)
 
 ![s](/asset/image/separator/30x30.png)
 
