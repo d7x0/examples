@@ -112,7 +112,7 @@ catch (\Exception $e)
                     )
                 [1] => Array
                     (
-                        [file] => /home/bitrix/www/local/lib/d7xz/example/exec.php
+                        [file] => <string>
                         [line] => 55
                         [function] => get_example_2
                         [class] => Bitrix\Main\Config\OptionExample
