@@ -168,12 +168,12 @@ $lc = $iblockTable->getConstants();
     [CHECKBOX]          => C
     [LISTBOX]           => L
 # PROPERTY_TYPE
-    [TYPE_STRING]       => S
-    [TYPE_NUMBER]       => N
-    [TYPE_FILE]         => F
-    [TYPE_ELEMENT]      => E
-    [TYPE_SECTION]      => G
-    [TYPE_LIST]         => L
+    [TYPE_STRING]       => S    Строка
+    [TYPE_NUMBER]       => N    Число
+    [TYPE_FILE]         => F    Файл
+    [TYPE_ELEMENT]      => E    Привязка к элементам
+    [TYPE_SECTION]      => G    Привязка к разделам
+    [TYPE_LIST]         => L    Список
 # MULTIPLE_CNT
     [DEFAULT_MULTIPLE_CNT] => 5
 # CALLBACK
@@ -187,6 +187,39 @@ $lc = $iblockTable->getConstants();
     [EVENT_ON_DELETE] => OnDelete
     [EVENT_ON_AFTER_DELETE] => OnAfterDelete
 ) */
+
+```
+Пример 3
+
+```php
+/*
+Пользовательские свойства
+-
+Название            PROPERTY_TYPE       USER_TYPE       USER_TYPE_SETTINGS      DEFAULT_VALUE
+HTML/текст          S                   HTML            a:1:{s:6:"height";i:200;}
+                                                                                a:2:{s:4:"TEXT";s:0:"";s:4:"TYPE";s:4:"HTML";}
+Дата                S                   Date
+Дата/Время          S                   DateTime
+Деньги              S                   Money
+Привязка к Яндекс.Карте  S              map_yandex      a:0:{}
+Привязка к карте Google Maps  S         map_google      a:1:{s:7:"API_KEY";s:0:"";}
+Привязка к пользователю  S              UserID
+Привязка к разделам с автозаполнением  G  SectionAuto   a:9:{s:4:"VIEW";s:1:"A";s:8:"SHOW_ADD";s:1:"N";s:9:"MAX_WIDTH";i:0;s:10:"MIN_HEIGHT";
+                                                        i:24;s:10:"MAX_HEIGHT";i:1000;s:7:"BAN_SYM";s:2:",;";s:7:"REP_SYM";s:1:" ";
+                                                        s:13:"OTHER_REP_SYM";s:0:"";s:11:"IBLOCK_MESS";s:1:"N";}
+Привязка к теме форума  S               TopicID
+Привязка к товарам (SKU)  E             SKU             a:9:{s:4:"VIEW";s:1:"A";s:8:"SHOW_ADD";s:1:"N";s:9:"MAX_WIDTH";i:0;s:10:"MIN_HEIGHT";
+                                                        i:24;s:10:"MAX_HEIGHT";i:1000;s:7:"BAN_SYM";s:2:",;";s:7:"REP_SYM";s:1:" ";
+                                                        s:13:"OTHER_REP_SYM";s:0:"";s:11:"IBLOCK_MESS";s:1:"N";}
+Привязка к файлу (на сервере)  S        FileMan
+Привязка к элементам в виде списка  E   EList           a:4:{s:4:"size";i:1;s:5:"width";i:0;s:5:"group";s:1:"N";s:8:"multiple";s:1:"N";}
+Привязка к элементам по XML_ID  S       ElementXmlID
+Привязка к элементам с автозаполнением  E  EAutocomplete    a:9:{s:4:"VIEW";s:1:"A";s:8:"SHOW_ADD";s:1:"N";s:9:"MAX_WIDTH";i:0;s:10:"MIN_HEIGHT";
+                                                            i:24;s:10:"MAX_HEIGHT";i:1000;s:7:"BAN_SYM";s:2:",;";s:7:"REP_SYM";s:1:" ";
+                                                            s:13:"OTHER_REP_SYM";s:0:"";s:11:"IBLOCK_MESS";s:1:"N";}
+Справочник              S               directory       a:5:{s:4:"size";i:1;s:5:"width";i:0;s:5:"group";s:1:"N";s:8:"multiple";s:1:"N";s:10:"TABLE_NAME";s:0:"";}
+Счетчик                 N               Sequence        a:1:{s:5:"write";s:1:"N";}
+*/
 
 ```
 
