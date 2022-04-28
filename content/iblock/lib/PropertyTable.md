@@ -123,7 +123,7 @@ $ptgmex1keys = array_keys(PropertyTable::getMap());      // Array, count = 29
     [1] => TIMESTAMP_X
     [2] => IBLOCK_ID
     [3] => NAME
-    [4] => ACTIVE
+    [4] => ACTIVE                   // values: Y | N
     [5] => SORT
     [6] => CODE
     [7] => DEFAULT_VALUE
@@ -131,17 +131,17 @@ $ptgmex1keys = array_keys(PropertyTable::getMap());      // Array, count = 29
     [9] => ROW_COUNT
     [10] => COL_COUNT
     [11] => LIST_TYPE
-    [12] => MULTIPLE
+    [12] => MULTIPLE                // values: Y | N
     [13] => XML_ID
     [14] => FILE_TYPE
     [15] => MULTIPLE_CNT
     [16] => TMP_ID
     [17] => LINK_IBLOCK_ID
-    [18] => WITH_DESCRIPTION
-    [19] => SEARCHABLE
-    [20] => FILTRABLE
-    [21] => IS_REQUIRED
-    [22] => VERSION
+    [18] => WITH_DESCRIPTION        // values: Y | N
+    [19] => SEARCHABLE              // values: Y | N
+    [20] => FILTRABLE               // values: Y | N
+    [21] => IS_REQUIRED             // values: Y | N
+    [22] => VERSION                 // values: 1 | 2
     [23] => USER_TYPE
     [24] => USER_TYPE_SETTINGS_LIST
     [25] => USER_TYPE_SETTINGS
@@ -161,31 +161,22 @@ $ptgmex1keys = array_keys(PropertyTable::getMap());      // Array, count = 29
 Пример 2
 
 ```php
-$iblockTable = new \ReflectionClass(IblockTable::class);
+$iblockTable = new \ReflectionClass(PropertyTable::class);
 $lc = $iblockTable->getConstants();
 /* Array (
-    [PROPERTY_STORAGE_COMMON] => 1
-    [PROPERTY_STORAGE_SEPARATE] => 2
-    [RIGHTS_SIMPLE] => S
-    [RIGHTS_EXTENDED] => E
-    [PROPERTY_INDEX_DISABLE] => N
-    [PROPERTY_INDEX_ENABLE] => Y
-    [PROPERTY_INDEX_INVALID] => I
-    [LIST_MODE_SEPARATE] => S
-    [LIST_MODE_COMBINED] => C
-    [SECTION_CHOOSER_SELECT] => L
-    [SECTION_CHOOSER_DROPDOWNS] => D
-    [SECTION_CHOOSER_PATH] => P
-    [SELECT] => L
-    [DROPDOWNS] => D
-    [PATH] => P
-    [SIMPLE] => S
-    [EXTENDED] => E
-    [SEPARATE] => S
-    [COMBINED] => C
-    [INVALID] => I
-    [DATA_CLASS_NAMESPACE] => Bitrix\Iblock\Elements
-    [DATA_CLASS_PREFIX] => Element
+# LIST_TYPE
+    [CHECKBOX]          => C
+    [LISTBOX]           => L
+# PROPERTY_TYPE
+    [TYPE_STRING]       => S
+    [TYPE_NUMBER]       => N
+    [TYPE_FILE]         => F
+    [TYPE_ELEMENT]      => E
+    [TYPE_SECTION]      => G
+    [TYPE_LIST]         => L
+# MULTIPLE_CNT
+    [DEFAULT_MULTIPLE_CNT] => 5
+# CALLBACK
     [EVENT_ON_BEFORE_ADD] => OnBeforeAdd
     [EVENT_ON_ADD] => OnAdd
     [EVENT_ON_AFTER_ADD] => OnAfterAdd
