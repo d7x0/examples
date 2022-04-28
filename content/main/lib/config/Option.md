@@ -98,7 +98,7 @@ catch (\Exception $e)
             (
                 [0] => Array
                     (
-                        [file] => /home/bitrix/www/local/lib/l7rf1i82.d7.doc/test/php/main/lib/config/OptionExample.php
+                        [file] => <string>
                         [line] => 35
                         [function] => get
                         [class] => Bitrix\Main\Config\Option
@@ -112,7 +112,7 @@ catch (\Exception $e)
                     )
                 [1] => Array
                     (
-                        [file] => /home/bitrix/www/local/lib/l7rf1i82.d7.doc/test/exec.php
+                        [file] => /home/bitrix/www/local/lib/d7xz/example/exec.php
                         [line] => 55
                         [function] => get_example_2
                         [class] => Bitrix\Main\Config\OptionExample

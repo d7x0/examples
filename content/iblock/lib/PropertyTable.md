@@ -119,7 +119,7 @@ $ptgmex1    = PropertyTable::getMap();
 $ptgmex1keys = array_keys(PropertyTable::getMap());      // Array, count = 29
 /* Array
 (
-    [0] => ID
+    [0] => ID                        // primary key
     [1] => TIMESTAMP_X
     [2] => IBLOCK_ID
     [3] => NAME
@@ -146,8 +146,55 @@ $ptgmex1keys = array_keys(PropertyTable::getMap());      // Array, count = 29
     [24] => USER_TYPE_SETTINGS_LIST
     [25] => USER_TYPE_SETTINGS
     [26] => HINT
-    [27] => LINK_IBLOCK                 // not found in db
-    [28] => IBLOCK                      // not found in db
+    [27] => LINK_IBLOCK              // reference key
+    [28] => IBLOCK                   // reference key
+) */
+/* keys:
+    primary   => ID
+    reference => [
+        IBLOCK_ID      => Bitrix\Iblock\Iblock.ID,
+        LINK_IBLOCK_ID => Bitrix\Iblock\Iblock.ID
+    ]
+*/
+
+```
+Пример 2
+
+```php
+$iblockTable = new \ReflectionClass(IblockTable::class);
+$lc = $iblockTable->getConstants();
+/* Array (
+    [PROPERTY_STORAGE_COMMON] => 1
+    [PROPERTY_STORAGE_SEPARATE] => 2
+    [RIGHTS_SIMPLE] => S
+    [RIGHTS_EXTENDED] => E
+    [PROPERTY_INDEX_DISABLE] => N
+    [PROPERTY_INDEX_ENABLE] => Y
+    [PROPERTY_INDEX_INVALID] => I
+    [LIST_MODE_SEPARATE] => S
+    [LIST_MODE_COMBINED] => C
+    [SECTION_CHOOSER_SELECT] => L
+    [SECTION_CHOOSER_DROPDOWNS] => D
+    [SECTION_CHOOSER_PATH] => P
+    [SELECT] => L
+    [DROPDOWNS] => D
+    [PATH] => P
+    [SIMPLE] => S
+    [EXTENDED] => E
+    [SEPARATE] => S
+    [COMBINED] => C
+    [INVALID] => I
+    [DATA_CLASS_NAMESPACE] => Bitrix\Iblock\Elements
+    [DATA_CLASS_PREFIX] => Element
+    [EVENT_ON_BEFORE_ADD] => OnBeforeAdd
+    [EVENT_ON_ADD] => OnAdd
+    [EVENT_ON_AFTER_ADD] => OnAfterAdd
+    [EVENT_ON_BEFORE_UPDATE] => OnBeforeUpdate
+    [EVENT_ON_UPDATE] => OnUpdate
+    [EVENT_ON_AFTER_UPDATE] => OnAfterUpdate
+    [EVENT_ON_BEFORE_DELETE] => OnBeforeDelete
+    [EVENT_ON_DELETE] => OnDelete
+    [EVENT_ON_AFTER_DELETE] => OnAfterDelete
 ) */
 
 ```
