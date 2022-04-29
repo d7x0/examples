@@ -11,7 +11,7 @@ Class SectionTable
 #### Оглавление:
 
 * Методы:
-    * Собственные методы [6]:
+    * Собственные методы [8]:
 
         * [Метод getTableName](#метод-getTableName)
         * [Метод getMap](#метод-getMap)
@@ -19,6 +19,8 @@ Class SectionTable
         * [Метод validateCode](#метод-validateCode)
         * [Метод validateXmlId](#метод-validateXmlId)
         * [Метод validateTmpId](#метод-validateTmpId)
+        * [Метод onUpdate](#метод-onUpdate)
+        * [Метод onAfterUpdate](#метод-onAfterUpdate)
 
     * Унаследованные методы [7]:
 
@@ -263,6 +265,50 @@ public static validateTmpId()
 ![s](/asset/image/separator/30x30.png)
 
 
+#### Метод **onUpdate**
+
+Описание: 
+Set old values for recount tree
+
+Сигнатура: 
+
+```php
+public static onUpdate($event)
+```
+
+Возвращаемое значение: 
+
+| Тип | Описание |
+| :--- | :--- |
+| void |  |
+
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+
+#### Метод **onAfterUpdate**
+
+Описание: 
+Clear tag cache, recount tree
+
+Сигнатура: 
+
+```php
+public static onAfterUpdate($event)
+```
+
+Возвращаемое значение: 
+
+| Тип | Описание |
+| :--- | :--- |
+| void |  |
+
+[к оглавлению](#оглавление)
+
+![s](/asset/image/separator/30x30.png)
+
+
 
 ## Унаследованные методы
 Описание методов см. класс [`Bitrix\Main\ORM\Data\DataManager`](/content/main/lib/orm/data/DataManager.md)
@@ -428,18 +474,39 @@ $stdex1result = SectionTable::delete($iblockSectionId);
 ```php
 // use Bitrix\Main\Loader;
 // Loader::includeModule("iblock");
-$stqex1 = SectionTable::query()
-         ->setFilter(['ID' => 'catalog'])
-         ->setSelect(['SECTIONS', 'EDIT_FILE_BEFORE']);
-$stqex1result1 = $stqex1->exec();
-$stqex1result2 = $stqex1->exec();
-$stqex1datafirst = $stqex1result2->fetch();
-$stqex1data  = [];
-$stqex1count = 0;
-while ($stqex1row = $stqex1result1->fetch())
+$stqex1q = SectionTable::query()
+         ->setFilter(['IBLOCK_ID' => 8])
+         ->setSelect(['ID', 'NAME', 'DEPTH_LEVEL', 'LEFT_MARGIN'])
+         ->setOrder([
+             // упорядочивает разделы
+             'LEFT_MARGIN'  => 'asc',  // от родителей к потомкам
+             'RIGHT_MARGIN' => 'asc',  // от потомков к родителям
+         ])
+         ->exec();
+$stqex1data  = [];                    // будет упорядочен по LEFT_MARGIN
+while ($stqex1row = $stqex1q->fetch())
 {
     array_push($stqex1data, $stqex1row);
-    $stqex1count++;
+}
+```
+
+Пример 2:
+
+```php
+// ->setFilter(['IBLOCK_ID' => 8, '>=DEPTH_LEVEL' => 4])
+$stqex2q = SectionTable::query()
+    ->setFilter(['IBLOCK_ID' => 8,
+        '>=RIGHT_MARGIN' => 1, '<=RIGHT_MARGIN' => 16 // регулирует глубину вложенности
+    ])
+    ->setSelect(['ID', 'NAME', 'RIGHT_MARGIN', 'DEPTH_LEVEL'])
+    ->setOrder([
+        'RIGHT_MARGIN' => 'asc'  // упорядочивает разделы от потомков к родителям
+    ])
+    ->exec();
+$stqex2data  = [];
+while ($stqex2row = $stqex2q->fetch())
+{
+    $stqex2data[$stqex2row['ID']] = $stqex2row;
 }
 ```
 [к оглавлению](#оглавление)
@@ -451,18 +518,75 @@ while ($stqex1row = $stqex1result1->fetch())
 Пример 1:
 
 ```php
-$itqex1 = IblockTable::query()
-    ->setFilter(['CODE' => 'delivery-city'])
-    ->setSelect(['ID']);
-$itqex1result1 = $itqex1->exec()->fetch();
-$iblockId = $itqex1result1['ID'];
+ /* $listSection = [
+    'A' => [
+        'AA' => [
+            'AAA' => [
+                'AAAA' => [
+                ],
+                'AAAB' => [
+                ],
+            ]
+        ]
+    ],
+    'B' => [
+        'BA' => [
+            'BAA' => [
+            ]
+        ]
+    ]
+]; */
 $sta1 = SectionTable::createObject();
 $sta1result = $sta1->setTimestampX(new \Bitrix\Main\Type\DateTime())
-                   ->setIblockId($iblockId)
-                   ->setName('Центральный округ')
-                   ->setCode('CAO')
-                   ->setDescriptionType('text')
-                   ->save();
+    ->setIblockId(8)
+    ->setName('A')
+    ->setCode('A')
+    ->save();
+$idA = $sta1result->getId();
+$sta1 = SectionTable::createObject();
+$sta1result = $sta1->setTimestampX(new \Bitrix\Main\Type\DateTime())
+    ->setIblockId(8)
+    ->setIblockSectionId($idA)
+    ->setName('AA')
+    ->setCode('AA')
+    ->save();
+$idAA = $sta1result->getId();
+$sta1 = SectionTable::createObject();
+$sta1result = $sta1->setTimestampX(new \Bitrix\Main\Type\DateTime())
+    ->setIblockId(8)
+    ->setIblockSectionId($idAA)
+    ->setName('AAA')
+    ->setCode('AAA')
+    ->save();
+$idAAA = $sta1result->getId();
+$sta1 = SectionTable::createObject();
+$sta1result = $sta1->setTimestampX(new \Bitrix\Main\Type\DateTime())
+    ->setIblockId(8)
+    ->setIblockSectionId($idAAA)
+    ->setName('AAAA')
+    ->setCode('AAAA')
+    ->save();
+$sta1 = SectionTable::createObject();
+$sta1result = $sta1->setTimestampX(new \Bitrix\Main\Type\DateTime())
+    ->setIblockId(8)
+    ->setIblockSectionId($idAAA)
+    ->setName('AAAB')
+    ->setCode('AAAB')
+    ->save();
+$sta1 = SectionTable::createObject();
+$sta1result = $sta1->setTimestampX(new \Bitrix\Main\Type\DateTime())
+    ->setIblockId(8)
+    ->setName('B')
+    ->setCode('B')
+    ->save();
+$idB = $sta1result->getId();
+$sta1 = SectionTable::createObject();
+$sta1result = $sta1->setTimestampX(new \Bitrix\Main\Type\DateTime())
+    ->setIblockId(8)
+    ->setIblockSectionId($idB)
+    ->setName('BA')
+    ->setCode('BA')
+    ->save();
 ```
 [к оглавлению](#оглавление)
 
@@ -473,19 +597,12 @@ $sta1result = $sta1->setTimestampX(new \Bitrix\Main\Type\DateTime())
 Пример 1:
 
 ```php
-$itqex1 = IblockTable::query()
-    ->setFilter(['CODE' => 'delivery-city'])
-    ->setSelect(['ID']);
-$itqex1result1 = $itqex1->exec()->fetch();
-$iblockId = $itqex1result1['ID'];
-$stqex1 = SectionTable::query()
-    ->setFilter(['CODE' => 'CAO', 'IBLOCK_ID' => $iblockId])
-    ->setSelect(['ID']);
-$stqex1result1 = $stqex1->exec()->fetch();
-$id = $stqex1result1['ID'];
-$stu1 = SectionTable::getByPrimary($id)->fetchObject();
-$stu1result = $stu1->setDescription('Some CAO short description')
-                     ->save();
+// bitrix/php_interface/dbconn.php
+// $DBDebug = true;
+// View: https://github.com/d7x0/examples/issues/1
+$stu1 = SectionTable::getByPrimary(56)->fetchObject();
+$stu1result = $stu1 ->setIblockSectionId(58)
+                    ->save();
 // Issue: save second time
 ```
 [к оглавлению](#оглавление)
