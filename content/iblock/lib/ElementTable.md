@@ -668,6 +668,83 @@ while ($etqex1row = $itqex1->fetch())
     array_push($etqex1data, $etqex1row);
 }
 ```
+
+Пример 6:
+
+```php
+// вычиление количества элементов в каждом разделе
+$itqex1 = ElementTable::query()
+    // IBLOCK_ELEMENT_IN_SECTION
+    ->registerRuntimeField('IEIS', [
+        "data_type"  => "integer",
+        "expression" => ["count(%d)", "ID"]
+    ])
+    ->setFilter(['IBLOCK.CODE' => 'supplier-steel'])
+    ->setSelect(['IBLOCK_SECTION.NAME', 'IEIS'])
+    ->setGroup(['IBLOCK_SECTION.ID'])
+    ->exec();
+$etqex1data  = [];
+while ($etqex1row = $itqex1->fetch())
+{
+    array_push($etqex1data, $etqex1row);
+}
+```
+
+Пример 7:
+
+```php
+// вычисление суммы свойств ORDER_COST_MINIMUM для каждого раздела
+$itqex1 = ElementTable::query()
+    ->registerRuntimeField('IEP', [
+        "data_type" => "Bitrix\Iblock\ElementProperty",
+        'reference' => ['=this.ID' => 'ref.IBLOCK_ELEMENT_ID'],
+    ])
+    ->registerRuntimeField('IP', [
+        "data_type" => "Bitrix\Iblock\Property",
+        'reference' => ['=this.IEP.IBLOCK_PROPERTY_ID' => 'ref.ID'],
+    ])
+    ->registerRuntimeField('IBLOCK_SECTION_SUM_ORDER_COST_MINIMUM', [
+        "data_type"  => "float",
+        "expression" => ["sum(%s)", "IEP.VALUE_NUM"]
+    ])
+    ->setFilter([
+        'IBLOCK.CODE' => 'supplier-steel', 'IP.CODE' => 'ORDER_COST_MINIMUM'
+    ])
+    ->setSelect(['IBLOCK_SECTION.NAME', 'IBLOCK_SECTION_SUM_ORDER_COST_MINIMUM'])
+    ->setGroup(['IBLOCK_SECTION.ID'])
+    ->exec();
+$etqex1data  = [];
+while ($etqex1row = $itqex1->fetch())
+{
+    array_push($etqex1data, $etqex1row);
+}
+```
+
+Пример 8:
+
+```php
+// вычисление суммы свойств ORDER_COST_MINIMUM для переданных ID элементов
+$itqex1 = ElementTable::query()
+    ->registerRuntimeField('IEP', [
+        "data_type" => "Bitrix\Iblock\ElementProperty",
+        'reference' => ['=this.ID' => 'ref.IBLOCK_ELEMENT_ID'],
+    ])
+    ->registerRuntimeField('IP', [
+        "data_type" => "Bitrix\Iblock\Property",
+        'reference' => ['=this.IEP.IBLOCK_PROPERTY_ID' => 'ref.ID'],
+    ])
+    ->registerRuntimeField('IBLOCK_ELEMENT_SUM_ORDER_COST_MINIMUM', [
+        "data_type"  => "float",
+        "expression" => ["sum(%s)", "IEP.VALUE_NUM"]
+    ])
+    ->setFilter([
+        'IBLOCK.CODE' => 'supplier-steel',
+        'IP.CODE' => 'ORDER_COST_MINIMUM', 'ID' => [319, 322]
+    ])
+    ->setSelect(['IBLOCK_ELEMENT_SUM_ORDER_COST_MINIMUM'])
+    ->exec();
+$etqex1data  = $itqex1->fetch();
+```
 [к оглавлению](#оглавление)
 
 ![s](/asset/image/separator/30x30.png)
