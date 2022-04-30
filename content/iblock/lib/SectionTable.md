@@ -601,7 +601,7 @@ $sta1result = $sta1->setTimestampX(new \Bitrix\Main\Type\DateTime())
 // $DBDebug = true;
 // View: https://github.com/d7x0/examples/issues/1
 $stu1 = SectionTable::getByPrimary(56)->fetchObject();
-$stu1result = $stu1 ->setIblockSectionId(58)
+$stu1result = $stu1 ->setIblockSectionId(54)
                     ->save();
 // Issue: save second time
 ```

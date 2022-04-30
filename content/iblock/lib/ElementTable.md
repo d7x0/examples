@@ -7,8 +7,7 @@ Class ElementTable
  
 Методы `add`, `update`, `delete` заблокированы, поэтому вместо класса `ElementTable` 
 нужно создать новый класс сущности для таблицы `b_iblock_element` 
-см. [ссылка] 
-(https:dev.1c-bitrix.rulearningcourseindex.php?COURSE_ID=43&LESSON_ID=4803). 
+см. [документацию по ORM](https:dev.1c-bitrix.rulearningcourseindex.php?COURSE_ID=43&LESSON_ID=4803). 
 Cущность должна иметь два метода `getTableName` и `getMap` 
  
 @package Bitrix\Iblock 
@@ -549,7 +548,7 @@ $etuex1result = ElementTable::delete($idMax);
 // use Bitrix\Main\Loader;
 // Loader::includeModule("iblock");
 $itqex1 = IblockTable::query()
-    ->setFilter(['CODE' => 'delivery-city'])
+    ->setFilter(['CODE' => 'supplier-steel'])
     ->setSelect(['CODE', 'ID']);
 $itqex1result1 = $itqex1->exec()->fetch();
 $iblockId = $itqex1result1['ID'];
@@ -557,14 +556,29 @@ $etqex1 = ElementTable::query()
          ->setFilter(['IBLOCK_ID' => $iblockId])
          ->setSelect(['NAME', 'XML_ID']);
 $etqex1result1 = $etqex1->exec();
-$etqex1result2 = $etqex1->exec();
-$etqex1datafirst = $etqex1result2->fetch();
 $etqex1data  = [];
-$etqex1count = 0;
 while ($etqex1row = $etqex1result1->fetch())
 {
     array_push($etqex1data, $etqex1row);
-    $etqex1count++;
+}
+```
+
+Пример 2:
+
+```php
+// один запрос с созданием динамического поля IB
+$itqex1 = ElementTable::query()
+    ->registerRuntimeField('IB', [
+        "data_type" => "Bitrix\Iblock\Iblock",
+        'reference' => ['=this.IBLOCK_ID' => 'ref.ID'],
+    ])
+    ->setFilter(['IB.CODE' => 'supplier-steel'])
+    ->setSelect(['ID', 'NAME', 'IBLOCK_SECTION_ID'])
+    ->exec();
+$etqex1data  = [];
+while ($etqex1row = $itqex1->fetch())
+{
+    array_push($etqex1data, $etqex1row);
 }
 ```
 [к оглавлению](#оглавление)
