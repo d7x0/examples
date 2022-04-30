@@ -601,7 +601,7 @@ while ($etqex1row = $itqex1->fetch())
 Пример 4:
 
 ```php
-// один запрос с созданием нескольких динамических полей IT, ITL
+// один запрос с созданием нескольких динамических полей ITE, ITL
 $itqex1 = ElementTable::query()
     ->registerRuntimeField('ITE', [
         "data_type" => "Bitrix\Iblock\Type",
