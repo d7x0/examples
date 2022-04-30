@@ -626,6 +626,48 @@ while ($etqex1row = $itqex1->fetch())
     array_push($etqex1data, $etqex1row);
 }
 ```
+
+Пример 5:
+
+```php
+// один запрос с созданием нескольких динамических полей ITE, ITL, IEP, IP, IPE
+$itqex1 = ElementTable::query()
+    ->registerRuntimeField('ITE', [
+        "data_type" => "Bitrix\Iblock\Type",
+        'reference' => ['=this.IBLOCK.IBLOCK_TYPE_ID' => 'ref.ID'],
+    ])
+    ->registerRuntimeField('ITL', [
+        "data_type" => "Bitrix\Iblock\TypeLanguage",
+        'reference' => ['=this.IBLOCK.IBLOCK_TYPE_ID' => 'ref.IBLOCK_TYPE_ID'],
+    ])
+    ->registerRuntimeField('IEP', [
+        "data_type" => "Bitrix\Iblock\ElementProperty",
+        'reference' => ['=this.ID' => 'ref.IBLOCK_ELEMENT_ID'],
+    ])
+    ->registerRuntimeField('IP', [
+        "data_type" => "Bitrix\Iblock\Property",
+        'reference' => ['=this.IEP.IBLOCK_PROPERTY_ID' => 'ref.ID'],
+    ])
+    ->registerRuntimeField('IPE', [
+        "data_type" => "Bitrix\Iblock\PropertyEnumeration",
+        'reference' => ['=this.IEP.VALUE_ENUM' => 'ref.ID'],
+    ])
+    ->setFilter([
+        'IBLOCK.CODE' => 'supplier-steel', 'ITL.LANGUAGE_ID' => 'ru',
+    ])
+    ->setSelect([
+        'ID', 'NAME', 'IBLOCK_SECTION.ID', 'IBLOCK_SECTION.NAME', 'IBLOCK.NAME', 'ITL.NAME',
+        'IEP.ID', 'IEP.VALUE', 'IEP.VALUE_ENUM',
+        'IP.NAME',
+        'IPE.VALUE'
+    ])
+    ->exec();
+$etqex1data  = [];
+while ($etqex1row = $itqex1->fetch())
+{
+    array_push($etqex1data, $etqex1row);
+}
+```
 [к оглавлению](#оглавление)
 
 ![s](/asset/image/separator/30x30.png)
