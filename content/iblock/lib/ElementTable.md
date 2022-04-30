@@ -164,12 +164,12 @@ $ttgnex11 = ElementTable::getMap();
 /* keys:
     primary   => ID
     reference => [
-        IBLOCK_ID            => Bitrix\Iblock\Iblock.ID,
-        WF_PARENT_ELEMENT_ID => Bitrix\Iblock\Element.ID
-        IBLOCK_SECTION_ID    => Bitrix\Iblock\Section.ID
-        MODIFIED_BY          => Bitrix\Main\User.ID
-        CREATED_BY           => Bitrix\Main\User.ID
-        WF_LOCKED_BY         => Bitrix\Main\User.ID
+        IBLOCK            => Bitrix\Iblock\Iblock.ID,
+        WF_PARENT_ELEMENT => Bitrix\Iblock\Element.ID
+        IBLOCK_SECTION    => Bitrix\Iblock\Section.ID
+        MODIFIED_BY_USER          => Bitrix\Main\User.ID
+        CREATED_BY_USER           => Bitrix\Main\User.ID
+        WF_LOCKED_BY_USER         => Bitrix\Main\User.ID
     ]
 */
 
@@ -566,6 +566,22 @@ while ($etqex1row = $etqex1result1->fetch())
 Пример 2:
 
 ```php
+// один запрос с привязкой по reference key
+$itqex1 = ElementTable::query()
+    // IBLOCK => Bitrix\Iblock\Iblock.ID - reference key
+    ->setFilter(['IBLOCK.CODE' => 'supplier-steel'])
+    ->setSelect(['ID', 'NAME', 'IBLOCK_SECTION_ID', 'IBLOCK.NAME'])
+    ->exec();
+$etqex1data  = [];
+while ($etqex1row = $itqex1->fetch())
+{
+    array_push($etqex1data, $etqex1row);
+}
+```
+
+Пример 3:
+
+```php
 // один запрос с созданием динамического поля IB
 $itqex1 = ElementTable::query()
     ->registerRuntimeField('IB', [
@@ -574,6 +590,36 @@ $itqex1 = ElementTable::query()
     ])
     ->setFilter(['IB.CODE' => 'supplier-steel'])
     ->setSelect(['ID', 'NAME', 'IBLOCK_SECTION_ID'])
+    ->exec();
+$etqex1data  = [];
+while ($etqex1row = $itqex1->fetch())
+{
+    array_push($etqex1data, $etqex1row);
+}
+```
+
+Пример 4:
+
+```php
+// один запрос с созданием нескольких динамических полей IB, IT, ITL
+$itqex1 = ElementTable::query()
+    ->registerRuntimeField('IB', [
+        "data_type" => "Bitrix\Iblock\Iblock",
+        'reference' => ['=this.IBLOCK_ID' => 'ref.ID'],
+    ])
+    ->registerRuntimeField('ITE', [
+        "data_type" => "Bitrix\Iblock\Type",
+        'reference' => ['=this.IB.IBLOCK_TYPE_ID' => 'ref.ID'],
+    ])
+    ->registerRuntimeField('ITL', [
+        "data_type" => "Bitrix\Iblock\TypeLanguage",
+        'reference' => ['=this.IB.IBLOCK_TYPE_ID' => 'ref.IBLOCK_TYPE_ID'],
+    ])
+    ->setFilter([
+        'IB.CODE' => 'supplier-steel', 'ITL.LANGUAGE_ID' => 'ru',
+    ])
+    ->setSelect([
+        'ID', 'NAME', 'IBLOCK_SECTION_ID', 'IB.NAME', 'ITL.NAME'])
     ->exec();
 $etqex1data  = [];
 while ($etqex1row = $itqex1->fetch())
