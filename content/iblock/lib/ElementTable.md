@@ -568,7 +568,7 @@ while ($etqex1row = $etqex1result1->fetch())
 ```php
 // один запрос с привязкой по reference key
 $itqex1 = ElementTable::query()
-    // IBLOCK => Bitrix\Iblock\Iblock.ID - reference key
+    // IBLOCK => Bitrix\Iblock\Iblock - reference key
     ->setFilter(['IBLOCK.CODE' => 'supplier-steel'])
     ->setSelect(['ID', 'NAME', 'IBLOCK_SECTION_ID', 'IBLOCK.NAME'])
     ->exec();
@@ -601,25 +601,24 @@ while ($etqex1row = $itqex1->fetch())
 Пример 4:
 
 ```php
-// один запрос с созданием нескольких динамических полей IB, IT, ITL
+// один запрос с созданием нескольких динамических полей IT, ITL
 $itqex1 = ElementTable::query()
-    ->registerRuntimeField('IB', [
-        "data_type" => "Bitrix\Iblock\Iblock",
-        'reference' => ['=this.IBLOCK_ID' => 'ref.ID'],
-    ])
     ->registerRuntimeField('ITE', [
         "data_type" => "Bitrix\Iblock\Type",
-        'reference' => ['=this.IB.IBLOCK_TYPE_ID' => 'ref.ID'],
+        'reference' => ['=this.IBLOCK.IBLOCK_TYPE_ID' => 'ref.ID'],
     ])
     ->registerRuntimeField('ITL', [
         "data_type" => "Bitrix\Iblock\TypeLanguage",
-        'reference' => ['=this.IB.IBLOCK_TYPE_ID' => 'ref.IBLOCK_TYPE_ID'],
+        'reference' => ['=this.IBLOCK.IBLOCK_TYPE_ID' => 'ref.IBLOCK_TYPE_ID'],
     ])
     ->setFilter([
-        'IB.CODE' => 'supplier-steel', 'ITL.LANGUAGE_ID' => 'ru',
+        // IBLOCK => Bitrix\Iblock\Iblock - reference key
+        'IBLOCK.CODE' => 'supplier-steel', 'ITL.LANGUAGE_ID' => 'ru',
     ])
     ->setSelect([
-        'ID', 'NAME', 'IBLOCK_SECTION_ID', 'IB.NAME', 'ITL.NAME'])
+        // IBLOCK_SECTION => Bitrix\Iblock\Section - reference key
+        'ID', 'NAME', 'IBLOCK_SECTION.ID', 'IBLOCK_SECTION.NAME', 'IBLOCK.NAME', 'ITL.NAME'
+    ])
     ->exec();
 $etqex1data  = [];
 while ($etqex1row = $itqex1->fetch())
