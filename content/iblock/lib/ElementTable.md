@@ -748,8 +748,8 @@ $etqex1data  = $itqex1->fetch();
 
 Пример 9:
 
-> * см. snippet [Получение элементов по свойствам типа S,N](https://github.com/d7x0/snippets/blob/master/src/usr/iblock/fetch_element_by_property_single_1.php)
-> * см. snippet [Получение элементов по свойствам типа S,N и L](https://github.com/d7x0/snippets/blob/master/src/usr/iblock/fetch_element_by_property_mixed_1.php)
+> * см. snippet [Получение списка элементов со всеми свойствами по свойствам типа S,N](https://github.com/d7x0/snippets/blob/master/src/usr/iblock/fetch_element_by_property_single_1.php)
+> * см. snippet [Получение списка элементов со всеми свойствами по свойствам типа S,N и L](https://github.com/d7x0/snippets/blob/master/src/usr/iblock/fetch_element_by_property_mixed_1.php)
 
 [к оглавлению](#оглавление)
 
