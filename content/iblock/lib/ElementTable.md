@@ -631,6 +631,7 @@ while ($etqex1row = $itqex1->fetch())
 
 ```php
 // один запрос с созданием нескольких динамических полей ITE, ITL, IEP, IP, IPE
+//
 $itqex1 = ElementTable::query()
     ->registerRuntimeField('ITE', [
         "data_type" => "Bitrix\Iblock\Type",
@@ -657,15 +658,39 @@ $itqex1 = ElementTable::query()
     ])
     ->setSelect([
         'ID', 'NAME', 'IBLOCK_SECTION.ID', 'IBLOCK_SECTION.NAME', 'IBLOCK.NAME', 'ITL.NAME',
-        'IEP.ID', 'IEP.VALUE', 'IEP.VALUE_ENUM',
-        'IP.NAME',
+        'IEP.VALUE', 'IEP.VALUE_NUM',
+        'IP.NAME', 'IP.CODE',
         'IPE.VALUE'
     ])
     ->exec();
 $etqex1data  = [];
-while ($etqex1row = $itqex1->fetch())
+$itqex1res = $itqex1->fetchAll();
+foreach ($itqex1res as $itqex1item)
 {
-    array_push($etqex1data, $etqex1row);
+    if(!is_array($etqex1data[$itqex1item['ID']]))
+    {
+        $etqex1data[$itqex1item['ID']] = [];
+    }
+    if(!is_array($etqex1data[$itqex1item['ID']]['PROPERTY']))
+    {
+        $etqex1data[$itqex1item['ID']]['PROPERTY'] = [];
+    }
+    if(!is_array($etqex1data[$itqex1item['ID']]['PROPERTY'][$itqex1item['IBLOCK_ELEMENT_IP_CODE']]))
+    {
+        $etqex1data[$itqex1item['ID']]['PROPERTY'][$itqex1item['IBLOCK_ELEMENT_IP_CODE']] = [];
+    }
+    $etqex1data[$itqex1item['ID']]['NAME']          = $itqex1item['NAME'];
+    $etqex1data[$itqex1item['ID']]['NAME_SECTION']  = $itqex1item['IBLOCK_ELEMENT_IBLOCK_SECTION_NAME'];
+    $etqex1data[$itqex1item['ID']]['NAME_IBLOCK']   = $itqex1item['IBLOCK_ELEMENT_IBLOCK_NAME'];
+    $etqex1data[$itqex1item['ID']]['NAME_TYPE']     = $itqex1item['IBLOCK_ELEMENT_ITL_NAME'];
+    $etqex1data[$itqex1item['ID']]['PROPERTY'][$itqex1item['IBLOCK_ELEMENT_IP_CODE']]['NAME'] =
+        $itqex1item['IBLOCK_ELEMENT_IP_NAME'];
+    $etqex1data[$itqex1item['ID']]['PROPERTY'][$itqex1item['IBLOCK_ELEMENT_IP_CODE']]['VALUE'] =
+        $itqex1item['IBLOCK_ELEMENT_IEP_VALUE'];
+    $etqex1data[$itqex1item['ID']]['PROPERTY'][$itqex1item['IBLOCK_ELEMENT_IP_CODE']]['VALUE_NUM'] =
+        $itqex1item['IBLOCK_ELEMENT_IEP_VALUE_NUM'];
+    $etqex1data[$itqex1item['ID']]['PROPERTY'][$itqex1item['IBLOCK_ELEMENT_IP_CODE']]['VALUE_ENUM'] =
+        $itqex1item['IBLOCK_ELEMENT_IPE_VALUE'];
 }
 ```
 

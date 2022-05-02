@@ -238,6 +238,30 @@ while($eptglex1row = $etqex1result1->fetch())
     $eptglex1res[$eptglex1row['ID']]['PROP'] = $eptglex1prq->fetchAll();
 }
 ```
+
+Пример 2:
+
+```php
+$itpqex1 = ElementPropertyTable::query()
+    ->registerRuntimeField('IP', [
+        "data_type" => "Bitrix\Iblock\Property",
+        'reference' => ['=this.IBLOCK_PROPERTY_ID' => 'ref.ID'],
+    ])
+    ->registerRuntimeField('IPE', [
+        "data_type" => "Bitrix\Iblock\PropertyEnumeration",
+        'reference' => ['=this.VALUE_ENUM' => 'ref.ID'],
+    ])
+    ->setFilter([
+        'ELEMENT.IBLOCK_ID' => 7,
+    ])
+    ->setSelect([
+        'IBLOCK_PROPERTY_ID', 'VALUE',
+        'IP.NAME', 'IP.CODE',
+        'IPE.VALUE'
+    ])
+    ->exec();
+$itpqex1res  = $itpqex1->fetchAll();
+```
 [к оглавлению](#оглавление)
 
 ![s](/asset/image/separator/30x30.png)
